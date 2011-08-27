@@ -6,6 +6,8 @@ $(function() {
 	circleHeight = height / 10,
 	paper = Raphael(document.getElementById("scene"), width, height),
 	mindmap,
+	bubble1,
+	bubble2,
 	Mindmap = require('./mindmap'),
 	mindmapFacade,
 	MindmapFacade = require('./mindmapfacade'),

@@ -77,8 +77,8 @@ nowjs.on('disconnect', function() {
 	console.log('left: ' + this.now.name);
 })
 
-everyone.now.moveEventBroadcast = function(bubble) {
-	nowjs.getGroup(this.now.room).now.receiveMoveEvent(this.now.name, bubble);
+everyone.now.bubbleMoveBroadcast = function(bubble) {
+	nowjs.getGroup(this.now.room).now.receiveMoveBubble(this.now.name, bubble);
 };
 
 everyone.now.bubbleAddedBroadcast = function(bubble) {

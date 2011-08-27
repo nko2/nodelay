@@ -1,7 +1,7 @@
 var util = require('./util'),
-EventEmitter = require('events').EventEmitter,
-Bubble = require('./bubble'),
-_ = require('underscore');
+	EventEmitter = require('events').EventEmitter,
+	_ = require('underscore'),
+	Bubble = require('./bubble');
 
 function Mindmap(paper) {
 	this.paper = paper;
@@ -12,68 +12,25 @@ function Mindmap(paper) {
 
 util.inherits(Mindmap, EventEmitter);
 
+
 Mindmap.prototype.createBubble = function(x, y) {
 	var self = this,
-	bubble = new Bubble(this.paper);
-
-	function dragger() {
-		this.ox = this.type == "ellipse" ? this.attr("cx") : this.attr("x");
-		this.oy = this.type == "ellipse" ? this.attr("cy") : this.attr("y");
-		if (this.type != "text") this.animate({
-			"fill-opacity": .2
-		},
-		500);
-
-		// Original coords for pair element
-		this.pair.ox = this.pair.type == "ellipse" ? this.pair.attr("cx") : this.pair.attr("x");
-		this.pair.oy = this.pair.type == "ellipse" ? this.pair.attr("cy") : this.pair.attr("y");
-		if (this.pair.type != "text") this.pair.animate({
-			"fill-opacity": .2
-		},
-		500);
-
-	}
-
-	function move(dx, dy) {
-		// Move main element
-		var att = this.type == "ellipse" ? {
-			cx: this.ox + dx,
-			cy: this.oy + dy
-		}: {
-			x: this.ox + dx,
-			y: this.oy + dy
-		};
-		this.attr(att);
-
-		// Move paired element
-		att = this.pair.type == "ellipse" ? {
-			cx: this.pair.ox + dx,
-			cy: this.pair.oy + dy
-		}: {
-			x: this.pair.ox + dx,
-			y: this.pair.oy + dy
-		};
-		this.pair.attr(att);
-
-		// Move connections
+		bubble = new Bubble(this.paper);
+	
+	bubble.on('drag', function updateConnections(data) {
 		for (var i = self.connections.length; i--;) {
 			self.paper.connection(self.connections[i]);
 		}
-		self.paper.safari();
-
-		now.moveEventBroadcast(this.id,this.x,this.y);
-	}
-
-	function up() {
-		self.changeSelection(bubble);
-	}
-
+	});
+	
+	bubble.on('drag-end', function updateSelection() {
+		self.changeSelection(this);
+	});
+		
 	bubble.draw(x, y);
-	bubble.ellipse.drag(move, dragger, up);
-	bubble.text.drag(move, dragger, up);
-
+		
 	this.bubbles.push(bubble);
-
+	
 	// Only connect the bubbles if this is not the first bubble
 	if (this.selectedBubble) {
 		this.connectBubbles(this.selectedBubble, bubble);
@@ -103,4 +60,3 @@ Mindmap.prototype.getBubble = function(id) {
 };
 
 module.exports = Mindmap;
-

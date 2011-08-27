@@ -1,10 +1,15 @@
-var Bubble = require('./bubble');
+var util = require('./util'),
+	events = require('events'),
+	Bubble = require('./bubble');
 
 function Mindmap(paper) {
 	this.paper = paper;
 	this.connections = [];
 	this.bubbles = [];
+	events.EventEmitter.call(this);
 };
+
+util.inherits(Mindmap, events.EventEmitter);
 
 
 Mindmap.prototype.createBubble = function(x, y) {
@@ -33,7 +38,7 @@ Mindmap.prototype.createBubble = function(x, y) {
 	}
 
 	function up() {
-		self.selectedBubble = bubble;
+		self.changeSelection(bubble);
 		this.animate({
 			"fill-opacity": 0
 		},
@@ -49,9 +54,16 @@ Mindmap.prototype.createBubble = function(x, y) {
 	if (this.selectedBubble) {
 		this.connectBubbles(this.selectedBubble, bubble);
 	}
-	this.selectedBubble = bubble;
-	
-	return bubble;
+	this.changeSelection(bubble);
+};
+
+Mindmap.prototype.changeSelection = function(newSelection) {
+	if (this.selectedBubble) {
+		this.selectedBubble.deselect();
+	}
+	this.selectedBubble = newSelection;
+	newSelection.select();
+	this.emit('selection-changed');
 };
 
 Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {

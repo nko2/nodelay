@@ -1,5 +1,5 @@
 var util = require('./util'), 
-	events = require('events')
+	events = require('events'),
 	idCounter = 0;
 
 function Bubble(paper) {
@@ -22,6 +22,18 @@ Bubble.prototype.draw = function(x, y) {
 	this.ellipse.attr(this.defaultBubbleAttributes);
 	this.addTextToBubble('I AM A BUBBLE!');
 	this.emit('new');
+};
+
+Bubble.prototype.select = function() {
+	console.log('SELECTED');
+	this.ellipse.animate({ stroke: '#fff' }, 100);
+	this.emit('selected');
+};
+
+Bubble.prototype.deselect = function() {
+	console.log('DESELECTED');
+	this.ellipse.animate({ stroke: '#AECC75' }, 100);
+	this.emit('deselected');
 };
 
 Bubble.prototype.addTextToBubble = function (bubbleText) {

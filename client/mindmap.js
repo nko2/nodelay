@@ -1,40 +1,63 @@
+var Bubble = require('./bubble');
+
 function Mindmap(paper) {
 	this.paper = paper;
 	this.connections = [];
 	this.bubbles = [];
-	this.defaultBubbleAttributes = {
-		 stroke: '#AECC75', 
-		 fill: '#333', 
-		 'stroke-width': 5
-	};
-	this.defaultWidth = 70;
-	this.defaultHeight = 50;
 };
 
 
 Mindmap.prototype.createBubble = function(x, y) {
-	var bubble = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
-	bubble.attr(this.defaultBubbleAttributes);
-	this.addTextToBubble(bubble);
+	var self = this,
+		bubble = new Bubble(this.paper);
 
+	function dragger() {
+		this.ox = this.attr("cx");
+		this.oy = this.attr("cy");
+		this.animate({
+			"fill-opacity": .2
+		},
+		500);
+	}
+
+	function move(dx, dy) {
+		var att = {
+			cx: this.ox + dx,
+			cy: this.oy + dy
+		};
+		this.attr(att);
+		for (var i = self.connections.length; i--;) {
+			self.paper.connection(self.connections[i]);
+		}
+		self.paper.safari();
+	}
+
+	function up() {
+		self.selectedBubble = bubble;
+		this.animate({
+			"fill-opacity": 0
+		},
+		500);
+	}
+		
+	bubble.draw(x, y);
+	bubble.ellipse.drag(move, dragger, up);
+		
 	this.bubbles.push(bubble);
+	
+	// Only connect the bubbles if this is not the first bubble
+	if (this.selectedBubble) {
+		this.connectBubbles(this.selectedBubble, bubble);
+	}
+	this.selectedBubble = bubble;
+	
 	return bubble;
 };
 
 Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
-	var connection = this.paper.connection(bubble1, bubble2, '#AECC75', '#AECC75');
+	var connection = this.paper.connection(bubble1.ellipse, bubble2.ellipse, '#AECC75', '#AECC75');
 	this.connections.push(connection);
 	return connection;
-};
-
-Mindmap.prototype.addTextToBubble = function (bubble) {
-	var bubbleText = this.paper.text(
-			bubble.getBBox().x + this.defaultWidth/2, 
-			bubble.getBBox().y+ this.defaultHeight/2, 
-			"idea1"
-		).attr({fill : '#AECC75'});
-	bubble.text = bubbleText;
-	console.log(bubble);
 };
 
 module.exports = Mindmap;

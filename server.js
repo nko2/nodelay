@@ -62,8 +62,11 @@ console.log('Running on 8080');
 
 var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {
+	this.now.room = 'monkey';
+	nowjs.getGroup(this.now.room).addUser(this.user.clientId);
+
 	everyone.now.connectionMessage(this.now.name, " has joined the room");
-	console.log('joined: ' + this.now.name);
+	console.log('joined: ' + this.now.id);
 })
 
 nowjs.on('disconnect', function() {
@@ -71,7 +74,7 @@ nowjs.on('disconnect', function() {
 	console.log('left: ' + this.now.name);
 })
 
-nowjs.on('add', function() {
-	console.log('add: ' + this.now.message);
-})
+everyone.now.moveEventBroadcast = function(id,x,y){
+	nowjs.getGroup(this.now.room).now.receiveMoveEvent(this.now.name,id, x, y);
+};
 

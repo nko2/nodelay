@@ -13,9 +13,19 @@ function Mindmap(paper) {
 util.inherits(Mindmap, EventEmitter);
 
 
-Mindmap.prototype.createBubble = function(x, y, text) {
+// Options;
+// - x {Number}
+// - y {Number}
+// - text {String}
+// - id {Number}
+Mindmap.prototype.createBubble = function(options) {
 	var self = this,
-		bubble = new Bubble(this.paper);
+		bubble = new Bubble({
+			paper: this.paper,
+			x: options.x,
+			y: options.y,
+			id: options.id
+		});
 	
 	bubble.on('drag', function updateConnections(data) {
 		for (var i = self.connections.length; i--;) {
@@ -27,9 +37,8 @@ Mindmap.prototype.createBubble = function(x, y, text) {
 		self.changeSelection(this);
 	});
 		
-	bubble.draw(x, y,text);
-		
 	this.bubbles.push(bubble);
+	bubble.draw(options.text);
 	
 	// Only connect the bubbles if this is not the first bubble
 	if (this.selectedBubble) {

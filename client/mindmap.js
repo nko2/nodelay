@@ -65,10 +65,6 @@ Mindmap.prototype.changeSelection = function(newSelection) {
 Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 	var connection = this.paper.connection(bubble1.ellipse, bubble2.ellipse, '#AECC75', '#AECC75');
 	this.connections.push(connection);
-	this.emit('connection', {
-		first: bubble1,
-		second: bubble2
-	});
 };
 
 Mindmap.prototype.getBubble = function(id) {

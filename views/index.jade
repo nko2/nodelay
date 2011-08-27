@@ -7,5 +7,5 @@ form(action='/create',method='post',name='create')
 	ul
 	-rooms.forEach(function(room){
 		li
-			a(href='/workspace/#{room}')=room
+			a(href='/workspace/#{room.name}')=room.name
 	-})

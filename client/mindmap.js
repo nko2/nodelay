@@ -25,6 +25,7 @@ Mindmap.prototype.createBubble = function(x, y) {
 		this.pair.ox = this.pair.type == "ellipse" ? this.pair.attr("cx") : this.pair.attr("x");
 		this.pair.oy = this.pair.type == "ellipse" ? this.pair.attr("cy") : this.pair.attr("y");
 		if (this.pair.type != "text") this.pair.animate({"fill-opacity": .2}, 500);
+
 	}
 
 	function move(dx, dy) {
@@ -46,11 +47,7 @@ Mindmap.prototype.createBubble = function(x, y) {
 	}
 
 	function up() {
-			// Fade original element on mouse up
-			if (this.type != "text") this.animate({"fill-opacity": 0}, 500);
-
-			// Fade paired element on mouse up
-			if (this.pair.type != "text") this.pair.animate({"fill-opacity": 0}, 500);            
+		self.changeSelection(bubble);
 	}
 		
 	bubble.draw(x, y);

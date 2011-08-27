@@ -20,7 +20,7 @@ util.inherits(Bubble, EventEmitter);
 Bubble.prototype.draw = function(x, y) {
 	this.ellipse = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
 	this.ellipse.attr(this.defaultBubbleAttributes);
-	this.addTextToBubble('I AM A BUBBLE!');
+	this.addTextToBubble('BUBBLE!');
 	this.emit('new');
 };
 
@@ -35,14 +35,22 @@ Bubble.prototype.deselect = function() {
 };
 
 Bubble.prototype.addTextToBubble = function (bubbleText) {
+	var self = this;
 	this.text = this.paper.text(
 			this.ellipse.getBBox().x + this.defaultWidth / 2, 
 			this.ellipse.getBBox().y + this.defaultHeight / 2, 
 			bubbleText
 		).attr({fill : '#AECC75'});
+		
 	//associate the shapes with each other.
 	this.ellipse.pair = this.text;
 	this.text.pair = this.ellipse;
+
+
+	this.text.click(function() {
+		var newText = prompt('Enter new text:');
+		self.text.attr('text', newText);
+	});
 };
 
 module.exports = Bubble;

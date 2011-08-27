@@ -1,8 +1,8 @@
 var EventEmitter = require('events').EventEmitter;
 
-function Pipe(mindmap) {
+function Pipe(mindmap, mindmapFacade) {
 	this.mindmap = mindmap;
-
+	this.mindmapFacade = mindmapFacade;
 };
 
 Pipe.prototype.wireUp = function() {
@@ -15,10 +15,6 @@ Pipe.prototype.wireUp = function() {
 
 	now.receiveBubbleAdded = function(name, bubble) {
 		if (name === now.naleme) return;
-		console.log(bubble.id);
-		console.log(bubble.x);
-		console.log(bubble.y);
-		console.log(bubble.text);
 
 		mindmap.createBubble({id:bubble.id, x:bubble.x, y:bubble.y, text:bubble.text});
 	};
@@ -27,15 +23,14 @@ Pipe.prototype.wireUp = function() {
 		var bubble1 = mindmap.getBubble(id1);
 		var bubble2 = mindmap.getBubble(id2);
 
-		mindmap.connectBubbles(ide1,ide2);
+		mindmap.connectBubbles(id1,id2);
 	};
 
-	this.mindmap.on('bubble-added', added);
-	this.mindmap.on('connection', fireConnection);
+	this.mindmapFacade.on('bubble-added', added);
+	this.mindmapFacade.on('connection', fireConnection);
 };
 
 function added(data) {
-	console.log(data);
 	now.bubbleAddedBroadcast({
 		id: data.bubble.id,
 		x: data.bubble.x,

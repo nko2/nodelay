@@ -27,8 +27,6 @@ $(function() {
 		text: "Example Bubble2"
 	});
 
-	$("label").inFieldLabels();
-
 	$("#scene").dblclick(function(evt) {
 		var centerY = evt.clientY - (circleHeight / 2),
 		newText;
@@ -48,11 +46,18 @@ $(function() {
 			return false;
 		});
 	});
+	
+	$(document).keypress(function(evt) {
+		if (evt.keyCode == 46) {
+			console.log('DELETE');
+			mindmapFacade.deleteSelection();
+		}
+	});
 
 	user = new User();
 	user.setupUser();
 
-	pipe = new Pipe(mindmap);
+	pipe = new Pipe(mindmap,mindmapFacade);
 	pipe.wireUp();
 
 	function textSetterPrompter(callback) {

@@ -1,0 +1,10 @@
+notifications:
+  recipients:
+      - tony.to@7digital.com
+      - william.munn@7digital.com
+
+before_script: 
+  - "git submodule init"
+  - "git submodule update"
+  - "npm install --dev"
+script: "npm test"

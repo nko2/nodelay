@@ -1,0 +1,31 @@
+{
+	"name": "node-knockout",
+	"version": "0.1.0",
+	"description": "",
+	"homepage": [
+		"",
+		"http://github.com/raoulmillais/node-knockout"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/raoulmillais/node-knockout.git"
+	},
+	"keywords": [],
+	"author": "Raoul Millais <raoul@raoulmillais.com>",
+	"licenses": [
+		"MIT"
+	],
+	"engines": [
+		"node >= 0.4.1 <= 0.5.0"
+	],
+	"scripts": {
+		"test": "spec/specs.js"
+	},
+	"main": "index.js",
+	"dependencies": {},
+	"devDependencies": {
+		"ready.js": ">= 1.3.1",
+		"jessie": ">=0.3.7",
+		"jezebel": ">=0.3.2"
+	}
+}

@@ -50,11 +50,12 @@ Mindmap.prototype.changeSelection = function(newSelection) {
 Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 	var connection = this.paper.connection(bubble1.ellipse, bubble2.ellipse, '#AECC75', '#AECC75');
 	this.connections.push(connection);
-	return connection;
+	this.emit('connection', { first: bubble1, second: bubble2 });
 };
 
 Mindmap.prototype.getBubble = function(id) {
-	return _.first(_.select(bubles, function(bubble) {
+	var self = this;
+	return _.first(_.select(self.bubbles, function(bubble) {
 		return bubble.ellipse.id === id
 	}));
 };

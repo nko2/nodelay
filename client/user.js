@@ -5,22 +5,17 @@ function User() {
 User.prototype.setupUser = function() {	
 	//now.name = prompt('Who are you', '');
 	
-	textSetterPrompter(function(buttonValue, message, formValues) {
+	nameSetterPrompter(function(buttonValue, message, formValues) {
 
-			newText = formValues.alertName;
+			now.name = formValues.alertName;
 			if (now.name != "") {
-				mindmapFacade.createBubble({
-					x: evt.clientX,
-					y: centerY,
-					text: now.name
-				});
 				return true;
 			}
 			message.children('#idea-text').css("border", "solid #ff0000 1px");
 			return false;
 		});
 		
-	function textSetterPrompter(callback) {
+	function nameSetterPrompter(callback) {
 		var txt = 'Who are you ?:<br /><input type="text" id="idea-text" name="alertName"/>';
 
 		$.prompt(txt, {

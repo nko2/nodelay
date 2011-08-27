@@ -3,6 +3,7 @@ $(function() {
 
 	var width = 1024,
 		height = 768,
+		pipe,
 		circleWidth = width /10,
 		circleHeight = height / 10,
 		bubbles = [],
@@ -43,7 +44,7 @@ $(function() {
 			this.animate({"fill-opacity": 0}, 500);
 		};
 
-
+		pipe = new Pipe();
 	/*$("#scene").dblclick(function(evt){
 		var drawnCircle = paper.ellipse(evt.clientX, evt.clientY, circleWidth, circleHeight);
 		bubbles.push(drawnCircle);

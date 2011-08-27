@@ -21,7 +21,8 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(browserify({
 		require: {
 			'index': path.join(__dirname, 'client/index'),
-			'bubble': path.join(__dirname, 'client/bubble')
+			'bubble': path.join(__dirname, 'client/bubble'),
+			'pipes': path.join(__dirname, 'client/pipes')
 		}
 	}));
 });

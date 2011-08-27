@@ -33,7 +33,7 @@ function added(data) {
 		id: data.bubble.id,
 		x: data.bubble.x,
 		y: data.bubble.y,
-		text: data.bubble.text
+		text: data.bubble.label
 	});
 
 	data.bubble.on('drag', broadcastMove);

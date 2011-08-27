@@ -50,10 +50,12 @@ console.log('Running on 8080');
 
 var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {
+	everyone.now.connectionMessage(this.now.name, " has joined the room");
 	console.log('joined: ' + this.now.name);
 })
 
 nowjs.on('disconnect', function() {
+	everyone.now.connectionMessage(this.now.name, " has left the room");
 	console.log('left: ' + this.now.name);
 })
 

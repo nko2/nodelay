@@ -1,7 +1,8 @@
 var util = require('./util'),
 	EventEmitter = require('events').EventEmitter,
 	_ = require('underscore'),
-	Bubble = require('./bubble');
+	Bubble = require('./bubble'),
+	Connection = require('./connection');
 
 function Mindmap(paper) {
 	this.paper = paper;
@@ -28,7 +29,7 @@ Mindmap.prototype.createBubble = function(options) {
 
 	bubble.on('drag', function updateConnections(data) {
 		for (var i = self.connections.length; i--;) {
-			self.paper.connection(self.connections[i]);
+			self.connections[i].redraw();
 		}
 	});
 
@@ -54,7 +55,6 @@ Mindmap.prototype.createBubble = function(options) {
 };
 
 Mindmap.prototype.deleteSelection = function() {
-	console.log(this.selectedBubble);	
 	this.deleteBubble(this.selectedBubble);
 };
 
@@ -75,8 +75,19 @@ Mindmap.prototype.changeSelection = function(newSelection) {
 };
 
 Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
-	var connection = this.paper.connection(bubble1.ellipse, 
-			bubble2.ellipse, '#AECC75', '#AECC75');
+	var self = this,
+		connection = new Connection({
+		paper: this.paper,
+		first: bubble1,
+		second: bubble2
+	});
+	connection.connect();
+	
+	connection.on('destroy', function() {
+		var idx = self.connections.indexOf(connection);
+		self.connections.splice(idx, 1);
+	});
+	
 	this.connections.push(connection);
 };
 

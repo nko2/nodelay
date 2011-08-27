@@ -86,7 +86,8 @@ Bubble.prototype.deselect = function() {
 Bubble.prototype.destroy = function() {
 	this.ellipse.remove();
 	this.text.remove();
-	this.emit('destroyed');
+	console.log('destroying bubble');
+	this.emit('destroy');
 };
 
 Bubble.prototype.addTextToBubble = function (bubbleText) {

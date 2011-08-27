@@ -83,4 +83,6 @@ everyone.now.moveEventBroadcast = function(bubble) {
 everyone.now.bubbleAddedBroadcast = function(bubble) {
 	nowjs.getGroup(this.now.room).now.receiveBubbleAdded(this.now.name, bubble);
 };
-
+everyone.now.bubbleConnection = function(id1,id2) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleConnection(this.now.name,id1,id2 );
+};

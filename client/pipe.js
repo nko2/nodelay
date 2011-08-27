@@ -14,13 +14,20 @@ Pipe.prototype.wireUp = function() {
 	};
 
 	now.receiveBubbleAdded = function(name, bubble) {
-		if (name === now.name) return;
+		if (name === now.naleme) return;
 		console.log(bubble.id);
 		console.log(bubble.x);
 		console.log(bubble.y);
 		console.log(bubble.text);
 
 		mindmap.createBubble({id:bubble.id, x:bubble.x, y:bubble.y, text:bubble.text});
+	};
+
+	now.receiveBubbleConnection = function(name,id1,id2){
+		var bubble1 = mindmap.getBubble(id1);
+		var bubble2 = mindmap.getBubble(id2);
+
+		mindmap.connectBubbles(ide1,ide2);
 	};
 
 	this.mindmap.on('bubble-added', added);

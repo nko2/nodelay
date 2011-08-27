@@ -1,7 +1,7 @@
 var util = require('./util'),
-	EventEmitter = require('events').EventEmitter,
-	_ = require('underscore'),
-	Bubble = require('./bubble');
+EventEmitter = require('events').EventEmitter,
+_ = require('underscore'),
+Bubble = require('./bubble');
 
 function Mindmap(paper) {
 	this.paper = paper;
@@ -19,12 +19,12 @@ util.inherits(Mindmap, EventEmitter);
 // - id {Number}
 Mindmap.prototype.createBubble = function(options) {
 	var self = this,
-		bubble = new Bubble({
-			paper: this.paper,
-			x: options.x,
-			y: options.y,
-			id: options.id
-		});
+	bubble = new Bubble({
+		paper: this.paper,
+		x: options.x,
+		y: options.y,
+		id: options.id
+	});
 
 	bubble.on('drag', function updateConnections(data) {
 		for (var i = self.connections.length; i--;) {
@@ -38,14 +38,10 @@ Mindmap.prototype.createBubble = function(options) {
 
 	this.bubbles.push(bubble);
 	bubble.draw(options.text);
-	
+
 	bubble.x = options.x;
 	bubble.y = options.y;
 	bubble.label = options.text;
-
-	this.emit('bubble-added', {
-		bubble: bubble
-	});
 
 	// Only connect the bubbles if this is not the first bubble
 	if (this.selectedBubble) {
@@ -53,6 +49,8 @@ Mindmap.prototype.createBubble = function(options) {
 	}
 
 	this.changeSelection(bubble);
+
+	return bubble;
 };
 
 Mindmap.prototype.changeSelection = function(newSelection) {
@@ -78,6 +76,11 @@ Mindmap.prototype.getBubble = function(id) {
 	return _.first(_.select(self.bubbles, function(bubble) {
 		return bubble.ellipse.id === id
 	}));
+};
+
+
+Mindmap.prototype.getNextBubbleId = function(){
+	return bubbles.length;
 };
 
 module.exports = Mindmap;

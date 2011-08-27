@@ -6,22 +6,25 @@ $(function() {
 	circleHeight = height / 10,
 	paper = Raphael(document.getElementById("scene"), width, height),
 	mindmap,
+	bubble1,
+	bubble2,
 	Mindmap = require('./mindmap'),
 	mindmapFacade,
 	MindmapFacade = require('./mindmapfacade'),
-	Pipe = require('./pipe'),
+	Dispatcher = require('./dispatcher'),
+	Receiver = require('./receiver'),
 	User = require('./user');
 
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
 
-	mindmapFacade.createBubble({
+	bubble1 = mindmapFacade.createBubble({
 		x: 100,
 		y: 100,
 		text: "Example Bubble1"
 	});
 
-	mindmapFacade.createBubble({
+	bubble2 = mindmapFacade.createBubble({
 		x: 300,
 		y: 300,
 		text: "Example Bubble2"
@@ -56,9 +59,14 @@ $(function() {
 	user = new User();
 	user.setupUser();
 
-	pipe = new Pipe(mindmap,mindmapFacade);
-	pipe.wireUp();
+	dispatcher = new Dispatcher(mindmapFacade);
+	console.log(bubble2);
+	dispatcher.AddListener(bubble1);
+	dispatcher.AddListener(bubble2);
 
+	receiver = new Receiver(mindmap);
+	receiver.wireUp();
+	
 	function textSetterPrompter(callback) {
 		var txt = 'What \'s the big idea ?:<br /><input type="text" id="idea-text" name="alertName"/>';
 

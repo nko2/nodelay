@@ -24,7 +24,8 @@ server.configure(function configureAppAndMiddleware() {
 			'util': path.join(__dirname, 'client/util'),
 			'mindmap': path.join(__dirname, 'client/mindmap'),
 			'bubble': path.join(__dirname, 'client/bubble'),
-			'pipe': path.join(__dirname, 'client/pipe'),
+			'dispatcher': path.join(__dirname, 'client/dispatcher'),
+			'receiver': path.join(__dirname, 'client/receiver'),
 			'user': path.join(__dirname, 'client/user')
 		}
 	}));
@@ -67,7 +68,7 @@ nowjs.on('connect', function() {
 	this.now.room = 'monkey';
 	nowjs.getGroup(this.now.room).addUser(this.user.clientId);
 
-	//everyone.now.connection(this.now.name, " has joined the room");
+	everyone.now.connection(this.now.name, " has joined the room");
 	console.log('joined: ' + this.now.id);
 })
 
@@ -76,14 +77,22 @@ nowjs.on('disconnect', function() {
 	console.log('left: ' + this.now.name);
 })
 
-everyone.now.moveEventBroadcast = function(bubble) {
-	nowjs.getGroup(this.now.room).now.receiveMoveEvent(this.now.name, bubble);
+everyone.now.bubbleMoveBroadcast = function(bubble) {
+	nowjs.getGroup(this.now.room).now.receiveMoveBubble(this.now.name, bubble);
 };
 
 everyone.now.bubbleAddedBroadcast = function(bubble) {
 	nowjs.getGroup(this.now.room).now.receiveBubbleAdded(this.now.name, bubble);
 };
-everyone.now.bubbleConnection = function(id1, id2) {
+everyone.now.bubbleConnectionBroadcast = function(id1, id2) {
 	nowjs.getGroup(this.now.room).now.receiveBubbleConnection(this.now.name, id1, id2);
+};
+
+everyone.now.bubbleDeletedBroadcast = function(id) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleDeleted(this.now.name, id);
+};
+
+everyone.now.bubbleLabelChangedBroadcast = function(id, text) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleLabelChanged(this.now.name, id, text);
 };
 

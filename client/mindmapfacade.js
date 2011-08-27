@@ -22,7 +22,7 @@ MindmapFacade.prototype.deleteSelection = function() {
 };
 
 MindmapFacade.prototype.connectBubbles = function(bubble1, bubble2) {
-	this.mindMap.connectBubbles(bubble1, bubble2);
+	this.mindmap.connectBubbles(bubble1, bubble2);
 	this.emit('connection', {
 		first: bubble1,
 		second: bubble2

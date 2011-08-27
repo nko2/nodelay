@@ -17,12 +17,12 @@ function Bubble(paper) {
 
 util.inherits(Bubble, EventEmitter);
 
-Bubble.prototype.draw = function(x, y) {
+Bubble.prototype.draw = function(x, y, text) {
 	var self = this;
 	
 	this.ellipse = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
 	this.ellipse.attr(this.defaultBubbleAttributes);
-	this.addTextToBubble('BUBBLE!');
+	this.addTextToBubble(text);
 	this.emit('new');
 	
 	function dragger() {

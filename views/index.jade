@@ -1,4 +1,11 @@
 h1 Welcome to Mind Mappr
 form(action='/create',method='post',name='create')
-	input(type='text',name='room')
+	input(type='text',name='room',id='room')
 	input(type='submit',value='create')
+
+#rooms
+	ul
+	-rooms.forEach(function(room){
+		li
+			a(href='/workspace/#{room}')=room
+	-})

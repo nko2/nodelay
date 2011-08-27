@@ -34,3 +34,12 @@ a{
 a:hover{
  	color: #FFF;
 }
+
+.jqimessage{
+	background: white;
+	color: #444444;
+    line-height: 20px;
+    padding: 10px;
+     margin-left: auto ;
+  	margin-right: auto ;
+    }

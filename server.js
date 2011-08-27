@@ -67,7 +67,7 @@ nowjs.on('connect', function() {
 	this.now.room = 'monkey';
 	nowjs.getGroup(this.now.room).addUser(this.user.clientId);
 
-	everyone.now.connection(this.now.name, " has joined the room");
+	//everyone.now.connection(this.now.name, " has joined the room");
 	console.log('joined: ' + this.now.id);
 })
 
@@ -83,6 +83,7 @@ everyone.now.moveEventBroadcast = function(bubble) {
 everyone.now.bubbleAddedBroadcast = function(bubble) {
 	nowjs.getGroup(this.now.room).now.receiveBubbleAdded(this.now.name, bubble);
 };
-everyone.now.bubbleConnection = function(id1,id2) {
-	nowjs.getGroup(this.now.room).now.receiveBubbleConnection(this.now.name,id1,id2 );
+everyone.now.bubbleConnection = function(id1, id2) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleConnection(this.now.name, id1, id2);
 };
+

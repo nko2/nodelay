@@ -2,7 +2,7 @@ var EventEmitter = require('events').EventEmitter;
 
 function Pipe(mindmap) {
 	this.mindmap = mindmap;
-
+	this.mindmapFacade = mindmapFacade;
 };
 
 Pipe.prototype.wireUp = function() {
@@ -27,11 +27,11 @@ Pipe.prototype.wireUp = function() {
 		var bubble1 = mindmap.getBubble(id1);
 		var bubble2 = mindmap.getBubble(id2);
 
-		mindmap.connectBubbles(ide1,ide2);
+		mindmap.connectBubbles(id1,id2);
 	};
 
-	this.mindmap.on('bubble-added', added);
-	this.mindmap.on('connection', fireConnection);
+	this.mindmapFacade.on('bubble-added', added);
+	this.mindmapFacade.on('connection', fireConnection);
 };
 
 function added(data) {

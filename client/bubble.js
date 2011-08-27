@@ -71,7 +71,8 @@ Bubble.prototype.move = function (toX, toY) {
 	// Move text
 	pairAttributes = { x: toX, y: toY };
 	this.ellipse.pair.attr(pairAttributes);
-	self.emit('move', { x: toX, y: toY});
+	
+	this.emit('move', { x: toX, y: toY});
 };
 
 Bubble.prototype.select = function() {

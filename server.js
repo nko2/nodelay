@@ -21,7 +21,8 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(browserify({
 		require: {
 			'index': path.join(__dirname, 'client/index'),
-			'mindmap': path.join(__dirname, 'client/mindmap')
+			'mindmap': path.join(__dirname, 'client/mindmap'),
+			'pipes': path.join(__dirname, 'client/pipes')
 		}
 	}));
 });

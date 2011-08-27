@@ -7,6 +7,7 @@ $(function() {
 		circleHeight = height / 10,
 		connections = [],
 		lastBubble,
+		pipes,
 		paper = Raphael(document.getElementById("scene"), width, height),
 		circle1, circle2, connection1, mindmap,
 		Mindmap = require('./mindmap');
@@ -53,5 +54,7 @@ $(function() {
 		mindmap.connectBubbles(lastBubble, newBubble);
 		lastBubble = newBubble;
 	});
+
+	pipes = new Pipes();
 });
 

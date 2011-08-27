@@ -19,10 +19,6 @@ Mindmap.prototype.createBubble = function(x, y) {
 	function dragger() {
 		this.ox = this.attr("cx");
 		this.oy = this.attr("cy");
-		this.animate({
-			"fill-opacity": .2
-		},
-		500);
 	}
 
 	function move(dx, dy) {
@@ -39,10 +35,6 @@ Mindmap.prototype.createBubble = function(x, y) {
 
 	function up() {
 		self.changeSelection(bubble);
-		this.animate({
-			"fill-opacity": 0
-		},
-		500);
 	}
 		
 	bubble.draw(x, y);

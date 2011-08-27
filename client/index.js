@@ -37,7 +37,7 @@ $(function() {
 			newText = formValues.alertName;
 			if (newText != "") {
 				console.log('hi');
-				mmindmapFacade.createBubble({
+				mindmapFacade.createBubble({
 					x: evt.clientX,
 					y: centerY,
 					text: newText

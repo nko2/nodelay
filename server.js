@@ -3,6 +3,7 @@ nko = require('nko')('LkbXCCkD9H9HndHX'),
 path = require('path'),
 nowjs = require('now'),
 eyes = require('eyes'),
+_ = require('underscore'),
 browserify = require('browserify'),
 crypto = require('crypto'),
 server;
@@ -37,7 +38,12 @@ server.get('/workspace/:name', function(req, res) {
 });
 
 server.post('/create', function(req, res) {
-	if (rooms.indexOf(req.body.room) != - 1) {
+	var exists = _.detect(rooms, function(room) {
+		return room.name == req.body.room;
+	});
+	console.log('room exists : ' + exists);
+	eyes.inspect(rooms);
+	if (exists) {
 		var message = 'That room already exists, pick another one';
 		res.redirect('/');
 	}

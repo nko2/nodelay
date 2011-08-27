@@ -2,7 +2,14 @@ body {
 	background: #333;
 	color: #AECC75;
 }
-
+	
 form p { position:relative }
 label  { position:absolute; top:0; left:0}
 
+a{
+	color: #AECC75;
+}
+
+a:hover{
+ 	color: #FFF;
+}

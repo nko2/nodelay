@@ -1,5 +1,5 @@
 var util = require('./util'), 
-	events = require('events'),
+	EventEmitter = require('events').EventEmitter,
 	idCounter = 0;
 
 function Bubble(paper) {
@@ -12,10 +12,10 @@ function Bubble(paper) {
 	this.defaultWidth = 70;
 	this.defaultHeight = 50;
 	this.id = ++idCounter;
-	events.EventEmitter.call(this);
+	EventEmitter.call(this);
 }
 
-util.inherits(Bubble, events.EventEmitter);
+util.inherits(Bubble, EventEmitter);
 
 Bubble.prototype.draw = function(x, y) {
 	this.ellipse = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
@@ -25,13 +25,11 @@ Bubble.prototype.draw = function(x, y) {
 };
 
 Bubble.prototype.select = function() {
-	console.log('SELECTED');
 	this.ellipse.animate({ stroke: '#fff' }, 100);
 	this.emit('selected');
 };
 
 Bubble.prototype.deselect = function() {
-	console.log('DESELECTED');
 	this.ellipse.animate({ stroke: '#AECC75' }, 100);
 	this.emit('deselected');
 };

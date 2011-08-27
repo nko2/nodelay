@@ -1,15 +1,15 @@
 var util = require('./util'),
-	events = require('events'),
+	EventEmitter = require('events').EventEmitter,
 	Bubble = require('./bubble');
 
 function Mindmap(paper) {
 	this.paper = paper;
 	this.connections = [];
 	this.bubbles = [];
-	events.EventEmitter.call(this);
+	EventEmitter.call(this);
 };
 
-util.inherits(Mindmap, events.EventEmitter);
+util.inherits(Mindmap, EventEmitter);
 
 
 Mindmap.prototype.createBubble = function(x, y) {

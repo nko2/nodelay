@@ -19,9 +19,7 @@ $(function() {
 
 	$("#scene").dblclick(function(evt) {
 		var centerY = evt.clientY - (circleHeight / 2);
-		console.dir(mindmap.selectedBubble);
 		mindmap.createBubble(evt.clientX, centerY);
-		console.dir(mindmap.selectedBubble);
 	});
 
 	user = new User();

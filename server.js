@@ -23,22 +23,26 @@ server.configure(function configureAppAndMiddleware() {
 });
 
 server.get('/', function showHomePage(req, res) {
-	res.render('index.jade');
+
+	res.render('index.jade', {
+		rooms: rooms
+	});
 });
 
 server.get('/workspace/:name', function(req, res) {
-	console.log(req.params.name);
 	res.render('workspace.jade');
 });
 
 server.post('/create', function(req, res) {
-	if (rooms.indexOf(req.body.room) > 0) {
+	if (rooms.indexOf(req.body.room) != - 1) {
+		var message = 'That room already exists, pick another one';
 		res.redirect('/');
 	}
-
-	console.log(req.params.room);
-	rooms.push(req.params.room);
-	res.redirect('/workspace/' + req.body.room);
+	else {
+		console.log('rooms: ' + rooms);
+		rooms.push(req.body.room);
+		res.redirect('/workspace/' + req.body.room);
+	}
 });
 server.listen(8080);
 

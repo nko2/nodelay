@@ -43,6 +43,7 @@ $(function() {
 			paper.connection(mindmap.connections[i]);
 		}
 		paper.safari();
+		now.moveEventBroadcast(1, 1, 1);
 	};
 
 	function up() {
@@ -68,8 +69,18 @@ $(function() {
 	height = 768,
 	circleWidth = width / 10,
 
-//	now.name = prompt('who are you?', '');
 	user = new User();
 	user.setupUser();
+
+	now.receiveMoveEvent = function(name,id, x, y) {
+		if(name === now.name)return;
+
+		var att = {
+			cx: circle1.ox + x,
+			cy: circle1.oy + y
+		};
+
+		circle1.attr(att);
+	};
 });
 

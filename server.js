@@ -22,7 +22,7 @@ server.configure(function configureAppAndMiddleware() {
 		require: {
 			'index': path.join(__dirname, 'client/index'),
 			'mindmap': path.join(__dirname, 'client/mindmap'),
-			'pipes': path.join(__dirname, 'client/pipes')
+			'user': path.join(__dirname, 'client/user')
 		}
 	}));
 });

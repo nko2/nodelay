@@ -1,17 +1,20 @@
-
 $(function() {
 
 	var width = 1024,
-		height = 768,
-		circleWidth = width /10,
-		circleHeight = height / 10,
-		connections = [],
-		lastBubble,
-		pipes,
-		paper = Raphael(document.getElementById("scene"), width, height),
-		circle1, circle2, connection1, mindmap,
-		Mindmap = require('./mindmap');
-		
+	height = 768,
+	circleWidth = width / 10,
+	circleHeight = height / 10,
+	connections = [],
+	lastBubble,
+	pipes,
+	paper = Raphael(document.getElementById("scene"), width, height),
+	circle1,
+	circle2,
+	connection1,
+	mindmap,
+	Mindmap = require('./mindmap'),
+	User = require('./user');
+
 	mindmap = new Mindmap(paper);
 	circle1 = mindmap.createBubble(100, 100, circleWidth, circleHeight);
 	lastBubble = circle2 = mindmap.createBubble(300, 300, circleWidth, circleHeight);
@@ -21,15 +24,18 @@ $(function() {
 	circle1.drag(move, dragger, up);
 	circle2.drag(move, dragger, up);
 
-	function dragger () {
+	function dragger() {
 		this.ox = this.attr("cx");
 		this.oy = this.attr("cy");
-		this.animate({"fill-opacity": .2}, 500);
+		this.animate({
+			"fill-opacity": .2
+		},
+		500);
 	};
 
-	function move (dx, dy) {
+	function move(dx, dy) {
 		var att = {
-			cx: this.ox + dx, 
+			cx: this.ox + dx,
 			cy: this.oy + dy
 		};
 		this.attr(att);
@@ -39,14 +45,17 @@ $(function() {
 		paper.safari();
 	};
 
-	function up () {
+	function up() {
 		lastBubble = this;
-		this.animate({"fill-opacity": 0}, 500);
+		this.animate({
+			"fill-opacity": 0
+		},
+		500);
 	};
-	
+
 	$("label").inFieldLabels();
 
-	$("#scene").dblclick(function(evt){
+	$("#scene").dblclick(function(evt) {
 		console.dir(evt);
 		var centerY = evt.clientY - (circleHeight / 2);
 		var newBubble = mindmap.createBubble(evt.clientX, centerY, circleWidth, circleHeight);
@@ -55,6 +64,12 @@ $(function() {
 		lastBubble = newBubble;
 	});
 
-	pipes = new Pipes();
+	var width = 1024,
+	height = 768,
+	circleWidth = width / 10,
+
+//	now.name = prompt('who are you?', '');
+	user = new User();
+	user.setupUser();
 });
 

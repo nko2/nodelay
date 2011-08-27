@@ -1,7 +1,7 @@
 var util = require('./util'),
-EventEmitter = require('events').EventEmitter,
-_ = require('underscore'),
-Bubble = require('./bubble');
+	EventEmitter = require('events').EventEmitter,
+	_ = require('underscore'),
+	Bubble = require('./bubble');
 
 function Mindmap(paper) {
 	this.paper = paper;
@@ -51,6 +51,7 @@ Mindmap.prototype.createBubble = function(options) {
 	if (this.selectedBubble) {
 		this.connectBubbles(this.selectedBubble, bubble);
 	}
+
 	this.changeSelection(bubble);
 };
 

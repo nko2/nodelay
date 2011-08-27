@@ -52,7 +52,9 @@ server.post('/create', function(req, res) {
 	}
 	else {
 		console.log('rooms: ' + rooms);
-		rooms.push({name: req.body.room});
+		rooms.push({
+			name: req.body.room
+		});
 		res.redirect('/workspace/' + req.body.room);
 	}
 });
@@ -74,7 +76,11 @@ nowjs.on('disconnect', function() {
 	console.log('left: ' + this.now.name);
 })
 
-everyone.now.moveEventBroadcast = function(id,x,y){
-	nowjs.getGroup(this.now.room).now.receiveMoveEvent(this.now.name,id, x, y);
+everyone.now.moveEventBroadcast = function(id, x, y) {
+	nowjs.getGroup(this.now.room).now.receiveMoveEvent(this.now.name, id, x, y);
+};
+
+everyone.now.bubbleAddedBroadcast = function(bubble) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleAdded(this.now.name, bubble);
 };
 

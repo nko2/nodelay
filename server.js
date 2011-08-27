@@ -93,6 +93,6 @@ everyone.now.bubbleDeletedBroadcast = function(id) {
 };
 
 everyone.now.bubbleLabelChangedBroadcast = function(id, text) {
-	nowjs.getGroup(this.now.room).now.receiveBubbleDeleted(this.now.name, id, text);
+	nowjs.getGroup(this.now.room).now.receiveBubbleLabelChanged(this.now.name, id, text);
 };
 

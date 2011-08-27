@@ -12,6 +12,7 @@ $(function() {
 	mindmapFacade,
 	MindmapFacade = require('./mindmapfacade'),
 	Dispatcher = require('./dispatcher'),
+	Receiver = require('./receiver'),
 	User = require('./user');
 
 	mindmap = new Mindmap(paper);
@@ -60,9 +61,13 @@ $(function() {
 	user.setupUser();
 
 	dispatcher = new Dispatcher(mindmapFacade);
+	console.log(bubble2);
 	dispatcher.AddListener(bubble1);
 	dispatcher.AddListener(bubble2);
 
+	receiver = new Receiver(mindmap);
+	receiver.wireUp();
+	
 	function textSetterPrompter(callback) {
 		var txt = 'What \'s the big idea ?:<br /><input type="text" id="idea-text" name="alertName"/>';
 

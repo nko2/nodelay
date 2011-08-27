@@ -39,7 +39,13 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 	this.text = this.paper.text(
 			this.ellipse.getBBox().x + this.defaultWidth / 2, 
 			this.ellipse.getBBox().y + this.defaultHeight / 2, 
-			bubbleText).attr({fill : '#AECC75'});
+			bubbleText
+		).attr({fill : '#AECC75'});
+		
+	//associate the shapes with each other.
+	this.ellipse.pair = this.text;
+	this.text.pair = this.ellipse;
+
 
 	this.text.click(function() {
 		var newText = prompt('Enter new text:');

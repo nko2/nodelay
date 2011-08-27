@@ -17,20 +17,33 @@ Mindmap.prototype.createBubble = function(x, y) {
 		bubble = new Bubble(this.paper);
 
 	function dragger() {
-		this.ox = this.attr("cx");
-		this.oy = this.attr("cy");
+		this.ox = this.type == "ellipse" ? this.attr("cx") : this.attr("x");
+		this.oy = this.type == "ellipse" ? this.attr("cy") : this.attr("y");
+		if (this.type != "text") this.animate({"fill-opacity": .2}, 500);
+
+		// Original coords for pair element
+		this.pair.ox = this.pair.type == "ellipse" ? this.pair.attr("cx") : this.pair.attr("x");
+		this.pair.oy = this.pair.type == "ellipse" ? this.pair.attr("cy") : this.pair.attr("y");
+		if (this.pair.type != "text") this.pair.animate({"fill-opacity": .2}, 500);
+
 	}
 
 	function move(dx, dy) {
-		var att = {
-			cx: this.ox + dx,
-			cy: this.oy + dy
-		};
-		this.attr(att);
-		for (var i = self.connections.length; i--;) {
-			self.paper.connection(self.connections[i]);
-		}
-		self.paper.safari();
+			// Move main element
+			var att = this.type == "ellipse" ? {cx: this.ox + dx, cy: this.oy + dy} :
+												{x: this.ox + dx, y: this.oy + dy};
+			this.attr(att);
+
+			// Move paired element
+			att = this.pair.type == "ellipse" ? {cx: this.pair.ox + dx, cy: this.pair.oy + dy} :
+												{x: this.pair.ox + dx, y: this.pair.oy + dy};
+			this.pair.attr(att);
+
+			// Move connections
+			for (var i = self.connections.length; i--;) {
+				self.paper.connection(self.connections[i]);
+			}
+			self.paper.safari();
 	}
 
 	function up() {
@@ -39,6 +52,7 @@ Mindmap.prototype.createBubble = function(x, y) {
 		
 	bubble.draw(x, y);
 	bubble.ellipse.drag(move, dragger, up);
+	bubble.text.drag(move, dragger, up);
 		
 	this.bubbles.push(bubble);
 	

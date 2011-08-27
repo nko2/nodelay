@@ -3,6 +3,7 @@ nko = require('nko')('LkbXCCkD9H9HndHX'),
 path = require('path'),
 nowjs = require('now'),
 eyes = require('eyes'),
+_ = require('underscore'),
 browserify = require('browserify'),
 crypto = require('crypto'),
 server;

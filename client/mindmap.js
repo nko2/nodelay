@@ -13,7 +13,7 @@ function Mindmap(paper) {
 util.inherits(Mindmap, EventEmitter);
 
 
-Mindmap.prototype.createBubble = function(x, y) {
+Mindmap.prototype.createBubble = function(x, y, text) {
 	var self = this,
 		bubble = new Bubble(this.paper);
 	
@@ -27,7 +27,7 @@ Mindmap.prototype.createBubble = function(x, y) {
 		self.changeSelection(this);
 	});
 		
-	bubble.draw(x, y);
+	bubble.draw(x, y,text);
 		
 	this.bubbles.push(bubble);
 	

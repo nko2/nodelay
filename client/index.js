@@ -11,14 +11,18 @@ $(function() {
 
 	mindmap = new Mindmap(paper);
 	
-	mindmap.createBubble(100, 100);
-	mindmap.createBubble(300, 300);
+	mindmap.createBubble(100, 100, "Example Bubble1");
+	mindmap.createBubble(300, 300, "Exapmple Bubble2");
 
 	$("label").inFieldLabels();
 
 	$("#scene").dblclick(function(evt) {
-		var centerY = evt.clientY - (circleHeight / 2);
-		mindmap.createBubble(evt.clientX, centerY);
+		
+		var centerY = evt.clientY - (circleHeight / 2),
+			text;
+			text = prompt("What's the big idea?", "");
+			
+		mindmap.createBubble(evt.clientX, centerY, text);
 	});
 
 	user = new User();

@@ -17,16 +17,23 @@ $(function() {
 		connection1 = paper.connection(circle1,circle2, '#000', '#000');
 		connections.push(connection1);
 		
+		
+		circle1.attr({fill : "red"});
+		circle2.attr({fill : "blue"});
+
+
 		circle1.drag(move, dragger, up);
 		circle2.drag(move, dragger, up);
 
 		function dragger () {
+			console.log(this);
 			this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
 			this.oy = this.type == "rect" ? this.attr("y") : this.attr("cy");
 			this.animate({"fill-opacity": .2}, 500);
 		};
 
 		function move (dx, dy) {
+			console.log(this);
 			var att = this.type == "rect" ? {x: this.ox + dx, y: this.oy + dy} : {cx: this.ox + dx, cy: this.oy + dy};
 			this.attr(att);
 			for (var i = connections.length; i--;) {
@@ -36,18 +43,18 @@ $(function() {
 		};
 		
 		function up () {
+		console.log(this);
 			this.animate({"fill-opacity": 0}, 500);
 		};
 		
 	
-	$("#scene").dblclick(function(evt){
+	/*$("#scene").dblclick(function(evt){
 		var drawnCircle = paper.ellipse(evt.clientX, evt.clientY, circleWidth, circleHeight);
 		bubbles.push(drawnCircle);
+		
 		
 		drawnCircle.drag(move, dragger, up);
 		
 		//now.add("added an object");
-	})
-	
-	
+	})*/	
 });

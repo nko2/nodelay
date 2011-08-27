@@ -20,7 +20,7 @@ Pipe.prototype.wireUp = function() {
 		console.log(bubble.y);
 		console.log(bubble.text);
 
-		mindmap.createBubble(bubble.id, bubble.x, bubble.y, bubble.text);
+		mindmap.createBubble({id:bubble.id, x:bubble.x, y:bubble.y, text:bubble.text});
 	};
 
 	this.mindmap.on('bubble-added', added);
@@ -33,7 +33,7 @@ function added(data) {
 		id: data.bubble.id,
 		x: data.bubble.x,
 		y: data.bubble.y,
-		text: data.bubble.text
+		text: data.bubble.label
 	});
 
 	data.bubble.on('drag', broadcastMove);

@@ -54,7 +54,7 @@ Bubble.prototype.draw = function(x, y) {
 
 			this.pair.attr(pairAttributes);
 
-			self.emit('drag', pairIsEllipse ? pairAttribures : attributes);
+			self.emit('drag', pairIsEllipse ? pairAttributes : attributes);
 			
 			self.paper.safari();
 	}

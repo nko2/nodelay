@@ -24,6 +24,7 @@ server.configure(function configureAppAndMiddleware() {
 			'util': path.join(__dirname, 'client/util'),
 			'mindmap': path.join(__dirname, 'client/mindmap'),
 			'bubble': path.join(__dirname, 'client/bubble'),
+			'pipe': path.join(__dirname, 'client/pipe'),
 			'user': path.join(__dirname, 'client/user')
 		}
 	}));

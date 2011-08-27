@@ -1,5 +1,6 @@
 var util = require('./util'),
 	EventEmitter = require('events').EventEmitter,
+	_ = require('underscore'),
 	Bubble = require('./bubble');
 
 function Mindmap(paper) {
@@ -50,6 +51,12 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 	var connection = this.paper.connection(bubble1.ellipse, bubble2.ellipse, '#AECC75', '#AECC75');
 	this.connections.push(connection);
 	this.emit('connection', { first: bubble1, second: bubble2 });
+};
+
+Mindmap.prototype.getBubble = function(id) {
+	return _.first(_.select(bubles, function(bubble) {
+		return bubble.ellipse.id === id
+	}));
 };
 
 module.exports = Mindmap;

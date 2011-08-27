@@ -24,6 +24,7 @@ $(function() {
 	user = new User();
 	user.setupUser();
 
-	pipe = new Pipe();
+	pipe = new Pipe(mindmap);
+	pipe.wireUp();
 });
 

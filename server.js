@@ -31,7 +31,6 @@ server.configure(function configureAppAndMiddleware() {
 });
 
 server.get('/', function showHomePage(req, res) {
-
 	res.render('index.jade', {
 		rooms: rooms
 	});
@@ -66,12 +65,12 @@ nowjs.on('connect', function() {
 	this.now.room = 'monkey';
 	nowjs.getGroup(this.now.room).addUser(this.user.clientId);
 
-	everyone.now.connectionMessage(this.now.name, " has joined the room");
+	everyone.now.connection(this.now.name, " has joined the room");
 	console.log('joined: ' + this.now.id);
 })
 
 nowjs.on('disconnect', function() {
-	everyone.now.connectionMessage(this.now.name, " has left the room");
+	everyone.now.disconnection(this.now.name, " has left the room");
 	console.log('left: ' + this.now.name);
 })
 

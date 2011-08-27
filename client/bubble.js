@@ -83,7 +83,7 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 			this.ellipse.getBBox().x+this.defaultWidth, 
 			this.ellipse.getBBox().y +this.defaultHeight, 
 			bubbleText
-		).attr({fill : '#AECC75'});
+		).attr({ fill : '#AECC75', 'font-size': 14 });
 		
 	//associate the shapes with each other.
 	this.ellipse.pair = this.text;

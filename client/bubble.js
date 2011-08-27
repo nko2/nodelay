@@ -40,6 +40,9 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 			this.ellipse.getBBox().y + this.defaultHeight / 2, 
 			bubbleText
 		).attr({fill : '#AECC75'});
+	//associate the shapes with each other.
+	this.ellipse.pair = this.text;
+	this.text.pair = this.ellipse;
 };
 
 module.exports = Bubble;

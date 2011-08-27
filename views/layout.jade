@@ -7,6 +7,12 @@ head
 	title App
 
 body!= body
+link(type='text/css', rel='stylesheet', href='/stylesheets/main.css')
+  script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/j
+  script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.
+  script(type='text/javascript', src='https://raw.github.com/DmitryBaranovskiy/raphael/ma
+  script(type='text/javascript', src='/nowjs/now.js')
+  script(type='text/javascript', src='./javascripts/main.js')
 	script(type='text/javascript', src='./browserify.js')
 	script
 		var app = require('./index');

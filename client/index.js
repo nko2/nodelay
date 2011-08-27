@@ -1,4 +1,7 @@
+var $ = require('jquery');
+	
 module.exports = {};
-$(function() {
-alert("jquery works");
+$(function(){
+	
+	alert("jquery works");
 }

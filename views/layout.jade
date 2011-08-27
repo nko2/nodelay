@@ -6,7 +6,9 @@ head
 	meta(http-equiv="Content-type", content="text/html; charset=utf-8")
 	title App
 
-body!= body
+body
+	object(data='/images/logo.svg', type='image/svg+xml', width='770',height='170',id='logo')
+	content!= body
 	link(type='text/css', rel='stylesheet', href='/stylesheets/main.css')
 	script(type='text/javascript', src='/javascripts/jquery-1.6.2.min.js')
 	script(type='text/javascript', src='/javascripts/raphael-min.js')

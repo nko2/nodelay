@@ -15,8 +15,7 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(express.cookieParser());
 	server.use(express.static(path.join(__dirname, 'public')));
 	server.use(browserify({
-		require: path.join(__dirname, 'client/index'),
-		mount : '/browserify.js'
+		require: path.join(__dirname, 'client/index')
 	}));
 });
 
@@ -24,6 +23,14 @@ server.get('/', function showHomePage(req, res) {
 	res.render('index.jade');
 });
 
+server.get('/workspace', function (req, res) {
+	res.render('workspace.jade');
+});
+
+server.post('/signup', function(req,res){
+	console.log(req.body.email);
+	res.redirect('/workspace');
+});
 server.listen(8080);
 
 console.log('Running on 8080');

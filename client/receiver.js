@@ -1,5 +1,6 @@
 var EventEmitter = require('events').EventEmitter;
-
+//this class shoudl take care of evets from outside and telling the
+//ui to updae
 function Pipe(mindmap, mindmapFacade) {
 	this.mindmap = mindmap;
 	this.mindmapFacade = mindmapFacade;

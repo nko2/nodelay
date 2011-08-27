@@ -24,7 +24,8 @@ server.configure(function configureAppAndMiddleware() {
 			'util': path.join(__dirname, 'client/util'),
 			'mindmap': path.join(__dirname, 'client/mindmap'),
 			'bubble': path.join(__dirname, 'client/bubble'),
-			'pipe': path.join(__dirname, 'client/pipe'),
+			'dispatcher': path.join(__dirname, 'client/dispatcher'),
+			'receiver': path.join(__dirname, 'client/receiver'),
 			'user': path.join(__dirname, 'client/user')
 		}
 	}));
@@ -67,7 +68,7 @@ nowjs.on('connect', function() {
 	this.now.room = 'monkey';
 	nowjs.getGroup(this.now.room).addUser(this.user.clientId);
 
-	//everyone.now.connection(this.now.name, " has joined the room");
+	everyone.now.connection(this.now.name, " has joined the room");
 	console.log('joined: ' + this.now.id);
 })
 

@@ -1,4 +1,4 @@
-function Pipe(){	
+function Pipes(){	
 	now.name = prompt('Who are you', '')
 
 	now.connectionMessage = function(name, message) {
@@ -7,4 +7,4 @@ function Pipe(){
 
 };
 
-module.exports = Pipe
+module.exports = Pipes

@@ -3,56 +3,58 @@ $(function() {
 
 	var width = 1024,
 		height = 768,
-		pipe,
 		circleWidth = width /10,
 		circleHeight = height / 10,
-		bubbles = [],
 		connections = [],
+		lastBubble,
+		pipes,
 		paper = Raphael(document.getElementById("scene"), width, height),
-		circle1, circle2, connection1, bubble,
-		Bubble = require('./bubble');
+		circle1, circle2, connection1, mindmap,
+		Mindmap = require('./mindmap');
 		
-		bubble = new Bubble(paper);
-		circle1 = bubble.create(100, 100, circleWidth, circleHeight);
-		circle2 = bubble.create(300, 300, circleWidth, circleHeight);
+	mindmap = new Mindmap(paper);
+	circle1 = mindmap.createBubble(100, 100, circleWidth, circleHeight);
+	lastBubble = circle2 = mindmap.createBubble(300, 300, circleWidth, circleHeight);
 
-		bubbles.push(circle1);
-		bubbles.push(circle2);
+	mindmap.connectBubbles(circle1, circle2, '#000', '#000');
 
-		bubble.connect(circle1, circle2, '#000', '#000');
+	circle1.drag(move, dragger, up);
+	circle2.drag(move, dragger, up);
 
-		circle1.drag(move, dragger, up);
-		circle2.drag(move, dragger, up);
+	function dragger () {
+		this.ox = this.attr("cx");
+		this.oy = this.attr("cy");
+		this.animate({"fill-opacity": .2}, 500);
+	};
 
-		function dragger () {
-			this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
-			this.oy = this.type == "rect" ? this.attr("y") : this.attr("cy");
-			this.animate({"fill-opacity": .2}, 500);
+	function move (dx, dy) {
+		var att = {
+			cx: this.ox + dx, 
+			cy: this.oy + dy
 		};
+		this.attr(att);
+		for (var i = mindmap.connections.length; i--;) {
+			paper.connection(mindmap.connections[i]);
+		}
+		paper.safari();
+	};
 
-		function move (dx, dy) {
-			var att = this.type == "rect" ? {x: this.ox + dx, y: this.oy + dy} : {cx: this.ox + dx, cy: this.oy + dy};
-			this.attr(att);
-			for (var i = bubble.connections.length; i--;) {
-				paper.connection(bubble.connections[i]);
-			}
-			paper.safari();
-		};
+	function up () {
+		lastBubble = this;
+		this.animate({"fill-opacity": 0}, 500);
+	};
+	
+	$("label").inFieldLabels();
 
-		function up () {
-		console.log(this);
-			this.animate({"fill-opacity": 0}, 500);
-		};
+	$("#scene").dblclick(function(evt){
+		console.dir(evt);
+		var centerY = evt.clientY - (circleHeight / 2);
+		var newBubble = mindmap.createBubble(evt.clientX, centerY, circleWidth, circleHeight);
+		newBubble.drag(move, dragger, up);
+		mindmap.connectBubbles(lastBubble, newBubble);
+		lastBubble = newBubble;
+	});
 
-		pipe = new Pipe();
-	/*$("#scene").dblclick(function(evt){
-		var drawnCircle = paper.ellipse(evt.clientX, evt.clientY, circleWidth, circleHeight);
-		bubbles.push(drawnCircle);
-
-
-		drawnCircle.drag(move, dragger, up);
-
-		//now.add("added an object");
-	})*/
+	pipes = new Pipes();
 });
 

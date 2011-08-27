@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "description": "",
   "homepage": [
-    "",
-    "http://github.com/raoulmillais/node-knockout",
-    "http://github.com/tonyto/nodelay"
+    "http://mindmappr.nodejitsu.com/"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/tonyto/nodelay.git"
+    "url": "git://github.com/nko2/nodelay.git"
   },
   "keywords": [],
   "author": "tonyto <tonyto85@gmail.com>",

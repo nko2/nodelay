@@ -27,7 +27,7 @@ server.listen(8080);
 
 console.log('Running on 8080');
 
-var everyone = nowjs.initialize();
+var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {
   console.log('joined: ' + this.now.name);
 })

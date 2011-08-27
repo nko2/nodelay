@@ -34,11 +34,15 @@ User.prototype.setupUser = function() {
 	}
 
 	now.connection = function(name, message) {
-		$("#messages").append($("<li>").attr('id', slugify(name)).text(name));
+		if (name) {
+			$("#messages").append($("<li>").attr('id', slugify(name)).text(name));
+		}
 	};
 
 	now.disconnection = function(name, message) {
-		$('#' + slugify(name)).remove();
+		if (name) {
+			$('#' + slugify(name)).remove();
+		}
 	};
 
 };

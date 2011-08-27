@@ -15,7 +15,7 @@ function Dispatcher(mindmapFacade) {
 			y: data.bubble.y,
 			text: data.bubble.label
 		});
-		self.AddListener(data.bubble);
+		self.addListener(data.bubble);
 	});
 
 	EventEmitter.call(this);
@@ -23,20 +23,19 @@ function Dispatcher(mindmapFacade) {
 
 util.inherits(Dispatcher, EventEmitter);
 
-Dispatcher.prototype.AddListener = function(bubble) {
-	bubble.on('drag', broadcastMove);
-};
-
-function broadcastBubbleConnection(data) {
-	now.bubbleConnection(data.first.id, data.second.id);
+Dispatcher.prototype.addListener = function(bubble) {
+	bubble.on('drag', function (data) {
+		console.log(data);
+		now.bubbleMoveBroadcast({
+			id: bubble.id,
+			x: data.x,
+			y: data.y
+		});
+	});
 }
 
-function broadcastMove(data) {
-	now.bubbleMoveBroadcast({
-		id: data.id,
-		x: data.x,
-		y: data.y
-	});
+function broadcastBubbleConnection(data) {
+	now.bubbleConnectionBroadcast(data.first.id, data.second.id);
 }
 
 module.exports = Dispatcher;

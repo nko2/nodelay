@@ -64,9 +64,8 @@ $(function() {
 
 
 	dispatcher = new Dispatcher(mindmapFacade);
-	console.log(bubble2);
-	dispatcher.AddListener(bubble1);
-	dispatcher.AddListener(bubble2);
+	dispatcher.addListener(bubble1);
+	dispatcher.addListener(bubble2);
 
 	receiver = new Receiver(mindmap);
 	receiver.wireUp();

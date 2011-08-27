@@ -37,8 +37,8 @@ Bubble.prototype.deselect = function() {
 Bubble.prototype.addTextToBubble = function (bubbleText) {
 	var self = this;
 	this.text = this.paper.text(
-			this.ellipse.getBBox().x + this.defaultWidth / 2, 
-			this.ellipse.getBBox().y + this.defaultHeight / 2, 
+			this.ellipse.getBBox().x+this.defaultWidth, 
+			this.ellipse.getBBox().y +this.defaultHeight, 
 			bubbleText
 		).attr({fill : '#AECC75'});
 		

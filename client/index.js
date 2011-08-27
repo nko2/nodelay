@@ -8,38 +8,32 @@ $(function() {
 		bubbles = [],
 		connections = [],
 		paper = Raphael(document.getElementById("scene"), width, height),
-		circle1 = paper.ellipse(100, 100, circleWidth, circleHeight),
-		circle2 = paper.ellipse(300, 300, circleWidth, circleHeight),
-		connection1;
+		circle1, circle2, connection1, bubble,
+		Bubble = require('./bubble');
+		
+		bubble = new Bubble(paper);
+		circle1 = bubble.create(100, 100, circleWidth, circleHeight);
+		circle2 = bubble.create(300, 300, circleWidth, circleHeight);
 
 		bubbles.push(circle1);
 		bubbles.push(circle2);
 
-		connection1 = paper.connection(circle1,circle2, '#000', '#000');
-		connections.push(connection1);
-
-
-		now.name = prompt('Who Are You?', '')
-		circle1.attr({fill : "red"});
-		circle2.attr({fill : "blue"});
-
+		bubble.connect(circle1, circle2, '#000', '#000');
 
 		circle1.drag(move, dragger, up);
 		circle2.drag(move, dragger, up);
 
 		function dragger () {
-			console.log(this);
 			this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
 			this.oy = this.type == "rect" ? this.attr("y") : this.attr("cy");
 			this.animate({"fill-opacity": .2}, 500);
 		};
 
 		function move (dx, dy) {
-			console.log(this);
 			var att = this.type == "rect" ? {x: this.ox + dx, y: this.oy + dy} : {cx: this.ox + dx, cy: this.oy + dy};
 			this.attr(att);
-			for (var i = connections.length; i--;) {
-				paper.connection(connections[i]);
+			for (var i = bubble.connections.length; i--;) {
+				paper.connection(bubble.connections[i]);
 			}
 			paper.safari();
 		};

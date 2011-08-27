@@ -18,7 +18,10 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(express.cookieParser());
 	server.use(express.static(path.join(__dirname, 'public')));
 	server.use(browserify({
-		require: path.join(__dirname, 'client/index')
+		require: {
+			'index': path.join(__dirname, 'client/index'),
+			'bubble': path.join(__dirname, 'client/bubble')
+		}
 	}));
 });
 

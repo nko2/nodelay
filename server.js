@@ -20,7 +20,7 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(browserify({
 		require: {
 			'index': path.join(__dirname, 'client/index'),
-			'bubble': path.join(__dirname, 'client/bubble')
+			'mindmap': path.join(__dirname, 'client/mindmap')
 		}
 	}));
 });

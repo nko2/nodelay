@@ -1,7 +1,9 @@
-h1 Name Your Mindmap
 form(action='/create',method='post',name='create')
-	input(type='text',name='room',id='room')
-	input(type='submit',value='create')
+	p
+		label(for='room') Name your mindmap
+		input(type='text',name='room',id='room')
+	p
+		input(type='submit',value='create')
 
 #rooms
 	ul

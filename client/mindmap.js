@@ -54,7 +54,8 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 };
 
 Mindmap.prototype.getBubble = function(id) {
-	return _.first(_.select(bubles, function(bubble) {
+	var self = this;
+	return _.first(_.select(self.bubbles, function(bubble) {
 		return bubble.ellipse.id === id
 	}));
 };

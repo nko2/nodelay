@@ -9,14 +9,18 @@ $(function() {
 	bubble1,
 	bubble2,
 	Mindmap = require('./mindmap'),
-	mindmapFacade,
 	MindmapFacade = require('./mindmapfacade'),
+	mindmapFacade,	
+	User = require('./user'),
+	user = new User(),
 	Dispatcher = require('./dispatcher'),
-	Receiver = require('./receiver'),
-	User = require('./user');
+	Receiver = require('./receiver');
 
+	user.setupUser();
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
+
+	
 
 	bubble1 = mindmapFacade.createBubble({
 		x: 100,
@@ -51,18 +55,15 @@ $(function() {
 	
 	$(document).keypress(function(evt) {
 		if (evt.keyCode == 46) {
-			console.log('DELETE');
 			mindmapFacade.deleteSelection();
 		}
 	});
 
-	user = new User();
-	user.setupUser();
+
 
 	dispatcher = new Dispatcher(mindmapFacade);
-	console.log(bubble2);
-	dispatcher.AddListener(bubble1);
-	dispatcher.AddListener(bubble2);
+	dispatcher.addListener(bubble1);
+	dispatcher.addListener(bubble2);
 
 	receiver = new Receiver(mindmap);
 	receiver.wireUp();

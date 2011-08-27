@@ -1,5 +1,6 @@
 var util = require('./util'),
 	EventEmitter = require('events').EventEmitter,
+	idCounter = 0,
 	_ = require('underscore'),
 	Bubble = require('./bubble'),
 	Connection = require('./connection');
@@ -27,7 +28,7 @@ Mindmap.prototype.createBubble = function(options) {
 		id: options.id
 	});
 
-	bubble.on('drag', function updateConnections(data) {
+	bubble.on('move', function updateConnections(data) {
 		for (var i = self.connections.length; i--;) {
 			self.connections[i].redraw();
 		}
@@ -94,13 +95,13 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 Mindmap.prototype.getBubble = function(id) {
 	var self = this;
 	return _.first(_.select(self.bubbles, function(bubble) {
-		return bubble.ellipse.id === id
+		return bubble.id === id
 	}));
 };
 
 
 Mindmap.prototype.getNextBubbleId = function(){
-	return bubbles.length;
+	return ++idCounter;
 };
 
 module.exports = Mindmap;

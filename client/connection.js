@@ -29,6 +29,7 @@ Connection.prototype.connect = function() {
 };
 
 Connection.prototype.redraw = function() {
+	console.log('redrawing connection');
 	this.paper.connection(this.connection);
 };
 

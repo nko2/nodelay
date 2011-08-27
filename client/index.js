@@ -6,8 +6,7 @@ $(function() {
 		circleHeight = height / 10,
 		pipes,
 		paper = Raphael(document.getElementById("scene"), width, height),
-		mindmap,
-		Mindmap = require('./mindmap'),
+		mindmap, Mindmap = require('./mindmap'),
 		User = require('./user');
 
 	mindmap = new Mindmap(paper);

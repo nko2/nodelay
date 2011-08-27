@@ -18,10 +18,53 @@ function Bubble(paper) {
 util.inherits(Bubble, EventEmitter);
 
 Bubble.prototype.draw = function(x, y) {
+	var self = this;
+	
 	this.ellipse = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
 	this.ellipse.attr(this.defaultBubbleAttributes);
 	this.addTextToBubble('BUBBLE!');
 	this.emit('new');
+	
+	function dragger() {
+		this.ox = this.type == "ellipse" ? this.attr("cx") : this.attr("x");
+		this.oy = this.type == "ellipse" ? this.attr("cy") : this.attr("y");
+		if (this.type != "text") this.animate({"fill-opacity": .2}, 500);
+
+		// Original coords for pair element
+		this.pair.ox = this.pair.type == "ellipse" ? this.pair.attr("cx") : this.pair.attr("x");
+		this.pair.oy = this.pair.type == "ellipse" ? this.pair.attr("cy") : this.pair.attr("y");
+		if (this.pair.type != "text") this.pair.animate({"fill-opacity": .2}, 500);
+
+	}
+
+	function move(dx, dy) {
+			// Move main element
+			var pairIsEllipse = (this.pair.type === 'ellipse'),
+				pairAttributes,
+				attributes = !pairIsEllipse ? 
+					{ cx: this.ox + dx, cy: this.oy + dy } :
+					{ x: this.ox + dx, y: this.oy + dy };
+
+			this.attr(attributes);
+
+			// Move paired element
+			pairAttributes = pairIsEllipse ? 
+				{ cx: this.pair.ox + dx, cy: this.pair.oy + dy } :
+				{ x: this.pair.ox + dx, y: this.pair.oy + dy };
+
+			this.pair.attr(pairAttributes);
+
+			self.emit('drag', pairIsEllipse ? pairAttribures : attributes);
+			
+			self.paper.safari();
+	}
+
+	function up() {
+		self.emit('drag-end');
+	}	
+	
+	this.ellipse.drag(move, dragger, up);
+	this.text.drag(move, dragger, up);	
 };
 
 Bubble.prototype.select = function() {

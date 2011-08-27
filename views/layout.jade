@@ -7,10 +7,10 @@ head
 	title App
 
 body!= body
-link(type='text/css', rel='stylesheet', href='/stylesheets/main.css')
+	link(type='text/css', rel='stylesheet', href='/stylesheets/main.css')
+	script(type='text/javascript', src='/javascripts/jquery-1.6.2.min.js
 	script(type='text/javascript', src='https://github.com/DmitryBaranovskiy/raphael/blob/master/raphael-min.js')
 	script(type='text/javascript', src='/nowjs/now.js')
-	script(type='text/javascript', src='./javascripts/main.js')
 	script(type='text/javascript', src='./browserify.js')
 	script
 		var app = require('./index');

@@ -52,7 +52,7 @@ $(function() {
 	user = new User();
 	user.setupUser();
 
-	pipe = new Pipe(mindmap);
+	pipe = new Pipe(mindmap,mindmapFacade);
 	pipe.wireUp();
 
 	function textSetterPrompter(callback) {

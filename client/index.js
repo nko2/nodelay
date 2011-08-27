@@ -13,9 +13,9 @@ $(function() {
 		
 	mindmap = new Mindmap(paper);
 	circle1 = mindmap.createBubble(100, 100, circleWidth, circleHeight);
-	lastBubble = circle2 = mindmap.createBubble(300, 300, circleWidth, circleHeight);
+	lastBubble = circle2 = mindmap.createBubble(300, 300);
 
-	mindmap.connectBubbles(circle1, circle2, '#000', '#000');
+	mindmap.connectBubbles(circle1, circle2);
 
 	circle1.drag(move, dragger, up);
 	circle2.drag(move, dragger, up);
@@ -48,7 +48,7 @@ $(function() {
 	$("#scene").dblclick(function(evt){
 		console.dir(evt);
 		var centerY = evt.clientY - (circleHeight / 2);
-		var newBubble = mindmap.createBubble(evt.clientX, centerY, circleWidth, circleHeight);
+		var newBubble = mindmap.createBubble(evt.clientX, centerY);
 		newBubble.drag(move, dragger, up);
 		mindmap.connectBubbles(lastBubble, newBubble);
 		lastBubble = newBubble;

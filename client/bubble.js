@@ -99,6 +99,7 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 	this.text.click(function() {
 		var newText = prompt('Enter new text:');
 		self.text.attr('text', newText);
+		self.emit('label-changed', { newText: newText });
 	});
 };
 

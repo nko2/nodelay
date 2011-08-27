@@ -18,7 +18,19 @@ MindmapFacade.prototype.createBubble = function(options) {
 	this.emit('bubble-added', {
 		bubble: bubble
 	});
+};
 
+Mindmap.prototype.deleteSelection = function() {
+	this.deleteBubble(this.selectedBubble);
+};
+
+MindmapFacade.prototype.deleteBubble = function(bubble) {
+	var self = this,
+	var bubble = this.mindMap.deleteBubble(bubble);
+
+	this.emit('bubble-deleted', {
+		bubble: bubble
+	});
 };
 
 MindmapFacade.prototype.connectBubbles = function(bubble1, bubble2) {

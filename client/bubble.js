@@ -45,13 +45,13 @@ Bubble.prototype.draw = function(text) {
 	}
 
 	function move(dx, dy) {
-			// Move main element
-			var toX = this.ox + dx,
-				toY = this.oy + dy;
+		// Move main element
+		var toX = this.ox + dx,
+			toY = this.oy + dy;
 
-			self.move(toX, toY);
-			self.emit('drag', { x: toX, y: toY});
-			self.paper.safari();
+		self.move(toX, toY);
+		self.emit('drag', { x: toX, y: toY});
+		self.paper.safari();
 	}
 
 	function up() {
@@ -83,11 +83,17 @@ Bubble.prototype.deselect = function() {
 	this.emit('deselected');
 };
 
+Bubble.prototype.destroy = function() {
+	this.ellipse.remove();
+	this.text.remove();
+	this.emit('destroyed');
+};
+
 Bubble.prototype.addTextToBubble = function (bubbleText) {
 	var self = this;
 	this.text = this.paper.text(
-			this.ellipse.getBBox().x+this.defaultWidth, 
-			this.ellipse.getBBox().y +this.defaultHeight, 
+			this.ellipse.getBBox().x + this.defaultWidth, 
+			this.ellipse.getBBox().y + this.defaultHeight, 
 			bubbleText
 		).attr({ fill : '#AECC75', 'font-size': 14 });
 		

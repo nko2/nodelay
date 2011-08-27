@@ -24,6 +24,13 @@ $(function() {
 			
 		mindmap.createBubble({ x: evt.clientX, y: centerY, text: text });
 	});
+	
+	$('#scene').keyup(function(evt) {
+		console.log('key pressed');
+		if (evt.keycode == 46) {
+			mindmap.deleteSelection();
+		}
+	});
 
 	user = new User();
 	user.setupUser();

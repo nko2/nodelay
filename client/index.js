@@ -11,8 +11,8 @@ $(function() {
 
 	mindmap = new Mindmap(paper);
 	
-	mindmap.createBubble(100, 100, "Example Bubble1");
-	mindmap.createBubble(300, 300, "Exapmple Bubble2");
+	mindmap.createBubble({ x: 100, y: 100, text: "Example Bubble1", id: 1001 });
+	mindmap.createBubble({ x: 300, y: 300, text: "Example Bubble2", id: 1002 });
 
 	$("label").inFieldLabels();
 
@@ -25,7 +25,7 @@ $(function() {
 				newText =formValues.alertName;
 				if (newText != ""){
 				console.log('hi');
-					mindmap.createBubble(evt.clientX, centerY, newText);
+					mindmap.createBubble({ x: evt.clientX, y: centerY, text: newText });
 					return true;
 				}
 				message.children('#idea-text').css("border","solid #ff0000 1px");

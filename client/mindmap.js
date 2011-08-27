@@ -1,7 +1,7 @@
 var util = require('./util'),
-	EventEmitter = require('events').EventEmitter,
-	_ = require('underscore'),
-	Bubble = require('./bubble');
+EventEmitter = require('events').EventEmitter,
+_ = require('underscore'),
+Bubble = require('./bubble');
 
 function Mindmap(paper) {
 	this.paper = paper;
@@ -12,30 +12,45 @@ function Mindmap(paper) {
 
 util.inherits(Mindmap, EventEmitter);
 
-
-Mindmap.prototype.createBubble = function(x, y, text) {
+// Options;
+// - x {Number}
+// - y {Number}
+// - text {String}
+// - id {Number}
+Mindmap.prototype.createBubble = function(options) {
 	var self = this,
-		bubble = new Bubble(this.paper);
-	
+	bubble = new Bubble({
+		paper: this.paper,
+		x: options.x,
+		y: options.y,
+		id: options.id
+	});
+
 	bubble.on('drag', function updateConnections(data) {
 		for (var i = self.connections.length; i--;) {
 			self.paper.connection(self.connections[i]);
 		}
 	});
-	
+
 	bubble.on('drag-end', function updateSelection() {
 		self.changeSelection(this);
 	});
-		
-	bubble.draw(x, y,text);
-		
+
 	this.bubbles.push(bubble);
-	
+	bubble.draw(options.text);
+
+	bubble.x = options.x;
+	bubble.y = options.y;
+	bubble.label = options.text;
+
 	// Only connect the bubbles if this is not the first bubble
 	if (this.selectedBubble) {
 		this.connectBubbles(this.selectedBubble, bubble);
 	}
+
 	this.changeSelection(bubble);
+
+	return bubble;
 };
 
 Mindmap.prototype.changeSelection = function(newSelection) {
@@ -50,7 +65,10 @@ Mindmap.prototype.changeSelection = function(newSelection) {
 Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 	var connection = this.paper.connection(bubble1.ellipse, bubble2.ellipse, '#AECC75', '#AECC75');
 	this.connections.push(connection);
-	this.emit('connection', { first: bubble1, second: bubble2 });
+	this.emit('connection', {
+		first: bubble1,
+		second: bubble2
+	});
 };
 
 Mindmap.prototype.getBubble = function(id) {
@@ -60,4 +78,10 @@ Mindmap.prototype.getBubble = function(id) {
 	}));
 };
 
+
+Mindmap.prototype.getNextBubbleId = function(){
+	return bubbles.length;
+};
+
 module.exports = Mindmap;
+

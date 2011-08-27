@@ -2,8 +2,13 @@ var util = require('./util'),
 	EventEmitter = require('events').EventEmitter,
 	idCounter = 0;
 
-function Bubble(paper) {
-	this.paper = paper;
+// Options
+// - paper
+// - x
+// - y
+// - id
+function Bubble(options) {
+	this.paper = options.paper;
 	this.defaultBubbleAttributes = {
 		 stroke: '#AECC75', 
 		 fill: '#333', 
@@ -11,16 +16,18 @@ function Bubble(paper) {
 	};
 	this.defaultWidth = 70;
 	this.defaultHeight = 50;
-	this.id = ++idCounter;
+	this.startX = options.x;
+	this.startY = options.y;
+	this.id = options.id || ++idCounter;
 	EventEmitter.call(this);
 }
 
 util.inherits(Bubble, EventEmitter);
 
-Bubble.prototype.draw = function(x, y, text) {
+Bubble.prototype.draw = function(text) {
 	var self = this;
 	
-	this.ellipse = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
+	this.ellipse = this.paper.ellipse(this.startX, this.startY, this.defaultWidth, this.defaultHeight);
 	this.ellipse.attr(this.defaultBubbleAttributes);
 	this.addTextToBubble(text);
 	this.emit('new');
@@ -39,9 +46,7 @@ Bubble.prototype.draw = function(x, y, text) {
 
 	function move(dx, dy) {
 			// Move main element
-			var pairIsEllipse = (this.pair.type === 'ellipse'),
-				pairAttributes,
-				toX = this.ox + dx,
+			var toX = this.ox + dx,
 				toY = this.oy + dy;
 
 			self.move(toX, toY);
@@ -94,6 +99,7 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 	this.text.click(function() {
 		var newText = prompt('Enter new text:');
 		self.text.attr('text', newText);
+		self.emit('label-changed', { newText: newText });
 	});
 };
 

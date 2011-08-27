@@ -41,21 +41,11 @@ Bubble.prototype.draw = function(x, y, text) {
 			// Move main element
 			var pairIsEllipse = (this.pair.type === 'ellipse'),
 				pairAttributes,
-				attributes = !pairIsEllipse ? 
-					{ cx: this.ox + dx, cy: this.oy + dy } :
-					{ x: this.ox + dx, y: this.oy + dy };
+				toX = this.ox + dx,
+				toY = this.oy + dy;
 
-			this.attr(attributes);
-
-			// Move paired element
-			pairAttributes = pairIsEllipse ? 
-				{ cx: this.pair.ox + dx, cy: this.pair.oy + dy } :
-				{ x: this.pair.ox + dx, y: this.pair.oy + dy };
-
-			this.pair.attr(pairAttributes);
-
-			self.emit('drag', pairIsEllipse ? pairAttributes : attributes);
-			
+			self.move(toX, toY);
+			self.emit('drag', { x: toX, y: toY});
 			self.paper.safari();
 	}
 
@@ -65,6 +55,17 @@ Bubble.prototype.draw = function(x, y, text) {
 	
 	this.ellipse.drag(move, dragger, up);
 	this.text.drag(move, dragger, up);	
+};
+
+Bubble.prototype.move = function (toX, toY) {
+	var pairAttributes,
+		attributes = { cx: toX, cy: toY };	
+
+	this.ellipse.attr(attributes);
+
+	// Move text
+	pairAttributes = { x: toX, y: toY };
+	this.ellipse.pair.attr(pairAttributes);
 };
 
 Bubble.prototype.select = function() {

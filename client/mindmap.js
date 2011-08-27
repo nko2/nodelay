@@ -54,12 +54,13 @@ Mindmap.prototype.createBubble = function(options) {
 };
 
 Mindmap.prototype.deleteSelection = function() {
+	console.log(this.selectedBubble);	
 	this.deleteBubble(this.selectedBubble);
 };
 
 Mindmap.prototype.deleteBubble = function(bubble) {
-	var idx = bubbles.indexOf(bubble);
-	bubbles.slice(idx, 1);
+	var idx = this.bubbles.indexOf(bubble);
+	this.bubbles.slice(idx, 1);
 
 	bubble.destroy();
 };

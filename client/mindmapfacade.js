@@ -17,17 +17,8 @@ MindmapFacade.prototype.createBubble = function(options) {
 	});
 };
 
-Mindmap.prototype.deleteSelection = function() {
-	this.deleteBubble(this.selectedBubble);
-};
-
-MindmapFacade.prototype.deleteBubble = function(bubble) {
-	var self = this,
-	var bubble = this.mindMap.deleteBubble(bubble);
-
-	this.emit('bubble-deleted', {
-		bubble: bubble
-	});
+MindmapFacade.prototype.deleteSelection = function() {
+	this.mindmap.deleteSelection();
 };
 
 MindmapFacade.prototype.connectBubbles = function(bubble1, bubble2) {

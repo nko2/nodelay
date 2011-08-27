@@ -10,7 +10,7 @@ util.inherits(MindmapFacade, EventEmitter);
 
 MindmapFacade.prototype.createBubble = function(options) {
 	var self = this,
-	bubble = this.mindMap.createBubble(options);
+	bubble = this.mindmap.createBubble(options);
 
 	this.emit('bubble-added', {
 		bubble: bubble

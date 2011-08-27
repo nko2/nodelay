@@ -7,9 +7,10 @@ function Pipe(mindmap) {
 
 Pipe.prototype.wireUp = function() {
 	var mindmap = this.mindmap;
-	now.receiveMoveEvent = function(name, id, x, y) {
+	now.receiveMoveEvent = function(name, bubble) {
 		if (name === now.name) return;
-		moveBubble(name, id, x, y);
+
+		moveBubble(bubble.id, bubble.x, bubble.y);
 	};
 
 	now.receiveBubbleAdded = function(name, bubble) {
@@ -19,7 +20,7 @@ Pipe.prototype.wireUp = function() {
 		console.log(bubble.y);
 		console.log(bubble.text);
 
-		mindmap.createBubble(bubble.x, bubble.y, bubble.text);
+		mindmap.createBubble(bubble.id, bubble.x, bubble.y, bubble.text);
 	};
 
 	this.mindmap.on('bubble-added', added);
@@ -29,9 +30,9 @@ Pipe.prototype.wireUp = function() {
 function added(data) {
 	console.log(data);
 	now.bubbleAddedBroadcast({
-		id: data.bubble.id, 
-		x: data.bubble.x, 
-		y: data.bubble.y, 
+		id: data.bubble.id,
+		x: data.bubble.x,
+		y: data.bubble.y,
 		text: data.bubble.text
 	});
 
@@ -43,10 +44,14 @@ function fireConnection(data) {
 }
 
 function broadcastMove(data) {
-	now.moveBubble(this.ellipse.id, data.x, data.y);
+	now.moveBubble({
+		id: this.ellipse.id,
+		x: data.x,
+		y: data.y
+	});
 }
 
-function moveBubble(name, id, x, y) {
+function moveBubble(id, x, y) {
 	var bubble = this.mindmap.getBubble(id);
 
 	bubble.move(x, y);

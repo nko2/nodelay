@@ -2,11 +2,18 @@ function Mindmap(paper) {
 	this.paper = paper;
 	this.connections = [];
 	this.bubbles = [];
+	this.defaultBubbleAttributes = {
+		 stroke: '#AECC75', 
+		 fill: '#333', 
+		 'stroke-width': 5
+	};
+	this.defaultWidth = 70;
+	this.defaultHeight = 50;
 };
 
-Mindmap.prototype.createBubble = function(x, y, width, height) {
-	var bubble = this.paper.ellipse(x, y, width, height);
-	bubble.attr({ stroke: '#AECC75', fill: '#333', 'stroke-width': 5 });
+Mindmap.prototype.createBubble = function(x, y) {
+	var bubble = this.paper.ellipse(x, y, this.defaultWidth, this.defaultHeight);
+	bubble.attr(this.defaultBubbleAttributes);
 	this.bubbles.push(bubble);
 	return bubble;
 };

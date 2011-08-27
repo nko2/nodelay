@@ -15,7 +15,8 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(express.cookieParser());
 	server.use(express.static(path.join(__dirname, 'public')));
 	server.use(browserify({
-		require: path.join(__dirname, 'client/index')
+		require: path.join(__dirname, 'client/index'),
+		mount : '/browserify.js'
 	}));
 });
 

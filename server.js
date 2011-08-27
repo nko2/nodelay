@@ -40,7 +40,7 @@ server.post('/create', function(req, res) {
 	}
 	else {
 		console.log('rooms: ' + rooms);
-		rooms.push(req.body.room);
+		rooms.push({name: req.body.room});
 		res.redirect('/workspace/' + req.body.room);
 	}
 });

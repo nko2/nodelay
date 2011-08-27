@@ -1,5 +1,6 @@
 var util = require('./util'),
 	EventEmitter = require('events').EventEmitter,
+	idCounter = 0,
 	_ = require('underscore'),
 	Bubble = require('./bubble');
 
@@ -89,7 +90,7 @@ Mindmap.prototype.getBubble = function(id) {
 
 
 Mindmap.prototype.getNextBubbleId = function(){
-	return this.bubbles.length;
+	return ++idCounter;
 };
 
 module.exports = Mindmap;

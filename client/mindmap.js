@@ -99,7 +99,6 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 
 
 Mindmap.prototype.changeLabel = function(bubble,text){
-	console.log('change the text to ' + text);
 	bubble.label = text;
 	bubble.draw(text);
 };

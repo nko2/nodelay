@@ -13,9 +13,10 @@ $(function() {
 	mindmapFacade,
 	userreceiver = require('./user')
 	Dispatcher = require('./dispatcher'),
-	userreceiver.setup();
 	Receiver = require('./receiver'),
 	PromptFactory = require('./promptFactory');
+	
+	userreceiver.setup();
 	
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);

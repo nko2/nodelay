@@ -40,6 +40,12 @@ Receiver.prototype.wireUp = function() {
 		var bubble = self.mindmap.getBubble(id);
 		self.mindmap.deleteBubble(bubble);
 	};
+	
+	now.receiveBubbleLabelChanged = function(name, data) {
+		if (name === now.name) return;
+		var bubble = self.mindmap.getBubble(data.id);
+		self.mindmap.changeLabel(bubble,data.newText);
+	};
 };
 
 module.exports = Receiver;

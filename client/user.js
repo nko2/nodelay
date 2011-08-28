@@ -1,31 +1,20 @@
+var PromptFactory = require('./promptFactory');
+
 userreceiver = {};
 
 userreceiver.setup = function() {
-	//now.name = prompt('Who are you', '');
-
-	nameSetterPrompter(function(buttonValue, message, formValues) {
-
-		now.name = formValues.alertName;
-		if (now.name != "") {
-			return true;
-		}
-		message.children('#idea-text').css("border", "solid #ff0000 1px");
-		return false;
-	});
-
-	function nameSetterPrompter(callback) {
-		var txt = 'Who are you ?:<br /><input type="text" id="idea-text" name="alertName"/>';
-
-		$.prompt(txt, {
-			callback: callback,
-			buttons: {
-				OK: true,
-				Cancel: false
-			},
-			closeOnEscape: false,
-			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+		$(document).ready(function(){
+			var promptFactory = new PromptFactory()
+			promptFactory.create(
+				$( "#dialog-form" ),
+				"Who are you?",
+				function(what){
+					now.name = what;
+					console.log('now name : '+now.name);
+			});
+			
 		});
-	}
+		
 
 	function slugify(name) {
 		return name.replace(' ', '-');

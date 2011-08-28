@@ -13,9 +13,10 @@ $(function() {
 	mindmapFacade,
 	userreceiver = require('./user')
 	Dispatcher = require('./dispatcher'),
-	Receiver = require('./receiver');
-
 	userreceiver.setup();
+	Receiver = require('./receiver'),
+	PromptFactory = require('./promptFactory');
+	
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
 
@@ -34,20 +35,20 @@ $(function() {
 	$("#scene").dblclick(function(evt) {
 		var centerY = evt.clientY - (circleHeight / 2),
 		newText;
-		textSetterPrompter(function(buttonValue, message, formValues) {
-
-			newText = formValues.alertName;
-			if (newText != "") {
-				mindmapFacade.createBubble({
+		
+		var promptFactory = new PromptFactory()
+			promptFactory.create(
+				$( "#dialog-form" ),
+				"What's the big idea?",
+				function(what){
+					newText = what;
+					console.log('new Text : '+newText);
+					mindmapFacade.createBubble({
 					x: evt.clientX,
 					y: centerY,
 					text: newText
 				});
-				return true;
-			}
-			message.children('#idea-text').css("border", "solid #ff0000 1px");
-			return false;
-		});
+			});
 	});
 
 	if ($.browser.mozilla) {
@@ -71,16 +72,5 @@ $(function() {
 	receiver = new Receiver(mindmap);
 	receiver.wireUp();
 
-	function textSetterPrompter(callback) {
-		var txt = 'What \'s the big idea ?:<br /><input type="text" id="idea-text" name="alertName"/>';
-
-		$.prompt(txt, {
-			callback: callback,
-			buttons: {
-				OK: true,
-				Cancel: false
-			}
-		});
-	}
 });
 

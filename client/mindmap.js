@@ -95,6 +95,12 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 	this.connections.push(connection);
 };
 
+
+Mindmap.prototype.changeLabel = function(bubble,text){
+	bubble.label = text;
+	bubble.draw(text);
+};
+
 Mindmap.prototype.getBubble = function(id) {
 	var self = this;
 	return _.first(_.select(self.bubbles, function(bubble) {

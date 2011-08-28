@@ -2,7 +2,6 @@
 			this.name = $( "#name" );
 			this.allFields = $( [] ).add( name );
 			this.tips = $( ".validateTips" );
-			
 		}
 		
 		
@@ -27,36 +26,54 @@
 				}
 			}
 		
-			PromptFactory.prototype.create = function(targetJQElement,question, callback){
+		PromptFactory.prototype.create = function(targetJQElement,question, callback){
 				var that =this;
 				targetJQElement.dialog({
 					autoOpen: false,
-					height: 250,
 					width: 350,
 					modal: true,
 					closeOnEscape: false,
 					open: function(){ $(".ui-dialog-titlebar-close").hide(); },
 					buttons: {
 						"OK": function() {
-							var bValid = true;
+							okay(that,callback);
+						},
+						Cancel: function() {
+							that.allFields.removeClass( "ui-state-error" );
+							$( this ).dialog( "close" );
+						}
+					},
+					close: function() {
+						that.allFields.removeClass( "ui-state-error" );
+					}
+				});
+				$('#ui-dialog-title-dialog-form').text(question);
+				targetJQElement.dialog( "open" );
+				
+				$(document).keydown(function(evt) {
+					if (evt.keyCode == 13) {						
+						okay(that,callback);
+						evt.preventDefault();
+				}
+		});
+				
+			};
+			
+			
+			function okay(that,callback){
+			
+						var bValid = true;
 								that.allFields.removeClass( "ui-state-error" );
 								bValid = bValid && that.checkLength( that.name, "username", 3, 16 );
 
 							if ( bValid ) {
 								//get the result
 								callback(that.name.val());
-								$( this ).dialog( "close" );
+								that.allFields.removeClass( "ui-state-error" );
+								$( '#dialog-form' ).dialog( "close" );
 							}
-						},
-						Cancel: function() {
-							$( this ).dialog( "close" );
-						}
-					},
-					close: function() {
-						that.allFields.val( "" ).removeClass( "ui-state-error" );
-					}
-				});
-				$('#ui-dialog-title-dialog-form').text(question);
-				targetJQElement.dialog( "open" );
-			};
+			}
+			
+	
 module.exports = PromptFactory;
+

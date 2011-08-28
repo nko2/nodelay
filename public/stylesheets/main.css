@@ -47,7 +47,7 @@ div.info-menu{
 }
 
 div.rooms{
-	padding: 10px 7px;
+	padding-left: 7px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 	width: 400px;
@@ -58,6 +58,14 @@ div.rooms{
 	background-color: #666;
 }
 
+div.rooms p{
+	text-decoration:underline;
+}
+
+div#messages p{
+	text-decoration:underline;
+}
+
 .center{margin:auto;}
 
 #messages {
@@ -66,7 +74,7 @@ div.rooms{
 	top: 184px;
 	width: 140px;
 	height: 300px;
-	padding: 10px 7px;
+	padding-left: 7px;
 	border: 1px solid white;
 	-moz-border-radius: 8px;
 	border-radius: 8px;

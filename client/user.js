@@ -1,8 +1,6 @@
-function User() {
-};
+userreceiver = {};
 
-
-User.prototype.setupUser = function() {
+userreceiver.setup = function() {
 	//now.name = prompt('Who are you', '');
 
 	nameSetterPrompter(function(buttonValue, message, formValues) {
@@ -33,13 +31,13 @@ User.prototype.setupUser = function() {
 		return name.replace(' ', '-');
 	}
 
-	now.connection = function(name, message) {
+	now.userConnected = function(name) {
 		if (name) {
 			$("#messages").append($("<li>").attr('id', slugify(name)).text(name));
 		}
 	};
 
-	now.disconnection = function(name, message) {
+	now.userDisconnected = function(name) {
 		if (name) {
 			$('#' + slugify(name)).remove();
 		}
@@ -47,4 +45,4 @@ User.prototype.setupUser = function() {
 
 };
 
-module.exports = User;
+module.exports = userreceiver;

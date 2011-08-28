@@ -18,6 +18,7 @@ server.configure(function configureAppAndMiddleware() {
 
 	server.use(express.bodyParser());
 	server.use(express.cookieParser());
+	server.use(express.session({ secret: 'LkbXCCkD9H9HndHX' }));
 	server.use(express.static(path.join(__dirname, 'public')));
 	server.use(browserify({
 		require: {
@@ -37,7 +38,10 @@ server.get('/', function showHomePage(req, res) {
 	
 	mindmapManager.all(function(err, mindmaps) {
 		res.render('index.jade', {
-			mindmaps: mindmaps
+			locals: {
+				flash: req.flash(),
+				mindmaps: mindmaps
+			}
 		});	
 	});
 });
@@ -60,8 +64,8 @@ server.post('/create', function(req, res) {
 		eyes.inspect(mindmaps);
 
 		if (exists) {
-			var message = 'A mindmap with that name already exists, try ' +
-							'another one';
+			req.flash('error', 'A mindmap with that name already exists, ' +
+									'try another one');
 			res.redirect('/');
 		}
 		else {
@@ -78,14 +82,12 @@ server.listen(8080);
 var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {
 	this.now.mindmap = 'monkey';
-	nowjs.getGroup(this.now.mindmap).addUser(this.user.clientId);
-
-	everyone.now.connection(this.now.name, " has joined the mindmap");
+	nowjs.getGroup(this.now.mindmap).now.userConnected(this.now.name);
 	console.log('joined: ' + this.now.id);
 })
 
 nowjs.on('disconnect', function() {
-	everyone.now.disconnection(this.now.name, " has left the mindmap");
+	nowjs.getGroup(this.now.mindmap).now.userDisconnected(this.now.name);
 	console.log('left: ' + this.now.name);
 })
 

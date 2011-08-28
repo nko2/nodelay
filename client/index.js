@@ -11,12 +11,11 @@ $(function() {
 	Mindmap = require('./mindmap'),
 	MindmapFacade = require('./mindmapfacade'),
 	mindmapFacade,
-	User = require('./user'),
-	user = new User(),
+	userreceiver = require('./user')
 	Dispatcher = require('./dispatcher'),
 	Receiver = require('./receiver');
 
-	user.setupUser();
+	userreceiver.setup();
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
 

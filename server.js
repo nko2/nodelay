@@ -54,7 +54,7 @@ server.post('/create', function(req, res) {
 	else {
 		console.log('rooms: ' + rooms);
 		rooms.push({
-			name: req.body.roomll
+			name: req.body.room
 		});
 		res.redirect('/workspace/' + req.body.room);
 	}

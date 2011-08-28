@@ -43,7 +43,6 @@ Receiver.prototype.wireUp = function() {
 	
 	now.receiveBubbleLabelChanged = function(name, data) {
 		if (name === now.name) return;
-		console.log('textchanged');
 		var bubble = self.mindmap.getBubble(data.id);
 		self.mindmap.changeLabel(bubble,data.newText);
 	};

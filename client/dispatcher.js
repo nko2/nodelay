@@ -36,6 +36,14 @@ Dispatcher.prototype.addListener = function(bubble) {
 	bubble.on('destroy', function(data) {
 		now.bubbleDestroyedBroadcast(bubble.id);
 	});
+
+	bubble.on('label-changed', function(data) {
+		console.log('broadcasting');
+		now.bubbleLabelChangedBroadcast({
+			id: bubble.id,
+			newText: data.newText
+		});
+	});
 }
 
 function broadcastBubbleConnection(data) {

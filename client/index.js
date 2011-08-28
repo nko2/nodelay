@@ -21,17 +21,22 @@ $(function() {
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
 
-	bubble1 = mindmap.createBubble({
-		x: 100,
-		y: 100,
-		text: "Example Bubble1"
+	welcomeBox = paper.rect(10, 10, 200, 50, 5);
+	welcomeText = paper.text(
+		welcomeBox.getBBox().x + 100, 
+		welcomeBox.getBBox().y + 25, 
+		'Double click to start'
+	).attr({ fill : '#AECC75', 'font-size': 16 });
+	welcomeBox.attr({
+		 stroke: '#AECC75', 
+		 fill: '#333', 
+		 'stroke-width': 3
 	});
-
-	bubble2 = mindmap.createBubble({
-		x: 300,
-		y: 300,
-		text: "Example Bubble2"
-	});
+	
+	setTimeout(function() {
+		welcomeBox.remove();
+		welcomeText.remove();
+	}, 5000);
 
 	$("#scene").dblclick(function(evt) {
 		var centerY = evt.clientY - (circleHeight / 2),
@@ -67,9 +72,6 @@ $(function() {
 
 	userreceiver.setup();
 	dispatcher = new Dispatcher(mindmapFacade);
-	dispatcher.addListener(bubble1);
-	dispatcher.addListener(bubble2);
-
 	receiver = new Receiver(mindmap,dispatcher);
 	receiver.wireUp();
 });

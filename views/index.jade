@@ -1,13 +1,15 @@
+div.info-menu
+	a(href="/info") Info
 div.create-room
 	form.create(action='/create',method='post',name='create')
 		- if (flash.error)
 			p.error= flash.error
 		p(class='center')
 			input#mindmapname.test(type='text',name='mindmapname', placeholder="Name your mindmap")
-		p(class='center')
 			input(type='submit',value='create')
 
 div.rooms
+	p Rooms
 	ul
 	-mindmaps.forEach(function(mindmap){
 		li

@@ -10,7 +10,7 @@ $(function() {
 	bubble2,
 	Mindmap = require('./mindmap'),
 	MindmapFacade = require('./mindmapfacade'),
-	mindmapFacade,	
+	mindmapFacade,
 	User = require('./user'),
 	user = new User(),
 	Dispatcher = require('./dispatcher'),
@@ -19,8 +19,6 @@ $(function() {
 	user.setupUser();
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
-
-	
 
 	bubble1 = mindmapFacade.createBubble({
 		x: 100,
@@ -52,14 +50,20 @@ $(function() {
 			return false;
 		});
 	});
-	
-	$(document).keypress(function(evt) {
-		if (evt.keyCode == 46) {
-			mindmapFacade.deleteSelection();
-		}
-	});
 
-
+	if ($.browser.mozilla) {
+		$(document).keypress(function(evt) {
+			if (evt.keyCode == 46) {
+				mindmapFacade.deleteSelection();
+			}
+		});
+	} else {
+		$(document).keydown(function(evt) {
+			if (evt.keyCode == 46) {
+				mindmapFacade.deleteSelection();
+			}
+		});
+	}
 
 	dispatcher = new Dispatcher(mindmapFacade);
 	dispatcher.addListener(bubble1);
@@ -67,7 +71,7 @@ $(function() {
 
 	receiver = new Receiver(mindmap);
 	receiver.wireUp();
-	
+
 	function textSetterPrompter(callback) {
 		var txt = 'What \'s the big idea ?:<br /><input type="text" id="idea-text" name="alertName"/>';
 

@@ -20,13 +20,13 @@ $(function() {
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
 
-	bubble1 = mindmapFacade.createBubble({
+	bubble1 = mindmap.createBubble({
 		x: 100,
 		y: 100,
 		text: "Example Bubble1"
 	});
 
-	bubble2 = mindmapFacade.createBubble({
+	bubble2 = mindmap.createBubble({
 		x: 300,
 		y: 300,
 		text: "Example Bubble2"
@@ -46,7 +46,7 @@ $(function() {
 					mindmapFacade.createBubble({
 					x: evt.clientX,
 					y: centerY,
-					text: newText
+					label: newText
 				});
 			});
 	});
@@ -69,7 +69,7 @@ $(function() {
 	dispatcher.addListener(bubble1);
 	dispatcher.addListener(bubble2);
 
-	receiver = new Receiver(mindmap);
+	receiver = new Receiver(mindmap,dispatcher);
 	receiver.wireUp();
 
 });

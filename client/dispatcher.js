@@ -11,12 +11,12 @@ function Dispatcher(mindmapFacade) {
 	this.mindmapFacade.on('bubble-added', function(data) {
 		now.bubbleAddedBroadcast({
 			connectedBubbleId: data.connectedBubbleId,
-			id: data.bubble.id,
-			x: data.bubble.x,
-			y: data.bubble.y,
-			text: data.bubble.label
+			id: data.id,
+			x: data.x,
+			y: data.y,
+			text: data.label
 		});
-		self.addListener(data.bubble);
+//		self.addListener(data.bubble);
 	});
 
 	EventEmitter.call(this);

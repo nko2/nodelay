@@ -6,7 +6,9 @@ body {
 
 	
 #scene {
-border:1px solid red;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid white;
 	width: 1000px;
 	height: 600px;
 }

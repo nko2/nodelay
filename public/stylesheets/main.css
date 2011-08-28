@@ -8,7 +8,7 @@ body {
 #scene {
 	-moz-border-radius: 8px;
 	border-radius: 8px;
-	border:1px solid white;
+	border:2px solid white;
 	width: 1024px;
 	height: 768px;
 }
@@ -34,7 +34,7 @@ div.create-room{
 	width: 400px;
 	margin: auto;
 	background-color: #666;
-	border: 1px solid white;
+	border: 2px solid white;
 	padding : 7px;
 }
 
@@ -54,7 +54,7 @@ div.rooms{
 	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
-	border: 1px solid white;
+	border: 2px solid white;
 	background-color: #666;
 }
 
@@ -75,7 +75,7 @@ div#messages p{
 	width: 140px;
 	height: 300px;
 	padding-left: 7px;
-	border: 1px solid white;
+	border: 2px solid white;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 }
@@ -83,8 +83,12 @@ div#messages p{
 #vote {
 	position: absolute;
 	left: 1120px;
-	top: 500	px;
-	border: none;
+	top: 10px;
+	width:150px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:2px solid white;
+	padding:5px;
 }
 
 li.title {

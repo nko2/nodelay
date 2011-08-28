@@ -1,20 +1,23 @@
 var PromptFactory = require('./promptFactory');
 
 function User() {
-
-		
 };
 
 
-
 User.prototype.setupUser = function() {	
-	$(document).ready(function(){
-			var namePrompt = new PromptFactory();
-			namePrompt.create($( "#dialog-form" ),"Who are you?",now.name);
-			console.log('NOW.Name= '+ now.name);
+
+		$(document).ready(function(){
+			var promptFactory = new PromptFactory()
+			promptFactory.create(
+				$( "#dialog-form" ),
+				"Who are you?",
+				function(what){
+					now.name = what;
+					console.log('now name : '+now.name);
+			});
+			
 		});
-
-
+		
 	function slugify(name) {
 		return name.replace(' ', '-');
 	}

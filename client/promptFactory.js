@@ -25,7 +25,7 @@
 				}
 			}
 		
-			PromptFactory.prototype.create = function(targetJQElement,question, valToSet){
+			PromptFactory.prototype.create = function(targetJQElement,question, callback){
 				var that =this;
 				targetJQElement.attr("title", question);
 				targetJQElement.dialog({
@@ -43,8 +43,7 @@
 
 							if ( bValid ) {
 								//get the result
-								valToSet = that.name.val();
-								//console.log(that.name.val());
+								callback(that.name.val());
 								$( this ).dialog( "close" );
 							}
 						},

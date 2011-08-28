@@ -104,7 +104,7 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 	//associate the shapes with each other.
 	this.ellipse.pair = this.text;
 	this.text.pair = this.ellipse;
-
+	this.label = bubbleText;
 
 	this.text.click(function() {
 		var editTextPrompt = new PromptFactory(),
@@ -115,6 +115,7 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 			function(what){
 				newText = what;
 				self.text.attr('text', newText);
+				self.label = what;
 				self.emit('label-changed', { newText: newText });
 			}
 		)

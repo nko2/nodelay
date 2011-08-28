@@ -28,7 +28,8 @@ Dispatcher.prototype.addListener = function(bubble) {
 		now.bubbleMoveBroadcast({
 			id: bubble.id,
 			x: data.x,
-			y: data.y
+			y: data.y,
+			text: bubble.label
 		});
 	});
 
@@ -41,7 +42,9 @@ Dispatcher.prototype.addListener = function(bubble) {
 	bubble.on('label-changed', function(data) {
 		now.bubbleLabelChangedBroadcast({
 			id: bubble.id,
-			newText: data.newText
+			x: bubble.x,
+			y: bubble.y,
+			text: data.newText
 		});
 	});
 }

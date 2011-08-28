@@ -117,10 +117,7 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 				self.text.attr('text', newText);
 				self.emit('label-changed', { newText: newText });
 			}
-		)/*
-		var newText = prompt('Enter new text:');
-		self.text.attr('text', newText);
-		self.emit('label-changed', { newText: newText });*/
+		)
 	});
 };
 

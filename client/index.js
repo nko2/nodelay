@@ -1,21 +1,22 @@
 $(function() {
 
 	var width = 1024,
-	height = 768,
-	circleWidth = width / 10,
-	circleHeight = height / 10,
-	paper = Raphael(document.getElementById("scene"), width, height),
-	mindmap,
-	bubble1,
-	bubble2,
-	Mindmap = require('./mindmap'),
-	MindmapFacade = require('./mindmapfacade'),
-	mindmapFacade,
-	userreceiver = require('./user')
-	Dispatcher = require('./dispatcher'),
+		height = 768,
+		circleWidth = width / 10,
+		circleHeight = height / 10,
+		paper = Raphael(document.getElementById("scene"), width, height),
+		mindmap,
+		bubble1,
+		bubble2,
+		Mindmap = require('./mindmap'),
+		MindmapFacade = require('./mindmapfacade'),
+		mindmapFacade,
+		userreceiver = require('./user-receiver'),
+		Dispatcher = require('./dispatcher'),
+		Receiver = require('./receiver'),
+		PromptFactory = require('./promptFactory');
+	
 	userreceiver.setup();
-	Receiver = require('./receiver'),
-	PromptFactory = require('./promptFactory');
 	
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
@@ -42,7 +43,6 @@ $(function() {
 				"What's the big idea?",
 				function(what){
 					newText = what;
-					console.log('new Text : '+newText);
 					mindmapFacade.createBubble({
 					x: evt.clientX,
 					y: centerY,
@@ -65,12 +65,12 @@ $(function() {
 		});
 	}
 
+	userreceiver.setup();
 	dispatcher = new Dispatcher(mindmapFacade);
 	dispatcher.addListener(bubble1);
 	dispatcher.addListener(bubble2);
 
 	receiver = new Receiver(mindmap,dispatcher);
 	receiver.wireUp();
-
 });
 

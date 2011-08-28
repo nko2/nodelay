@@ -2,8 +2,10 @@
 			this.name = $( "#name" );
 			this.allFields = $( [] ).add( name );
 			this.tips = $( ".validateTips" );
-
+			
 		}
+		
+		
 			PromptFactory.prototype.updateTips = function updateTips( t ) {
 				var self = this;
 				this.tips
@@ -27,8 +29,6 @@
 		
 			PromptFactory.prototype.create = function(targetJQElement,question, callback){
 				var that =this;
-				targetJQElement.attr("title", question);
-				
 				targetJQElement.dialog({
 					autoOpen: false,
 					height: 250,

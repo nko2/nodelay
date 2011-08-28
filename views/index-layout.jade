@@ -1,0 +1,30 @@
+!!! 5
+
+html
+
+head
+	meta(http-equiv="Content-type", content="text/html; charset=utf-8")
+	link(type='text/css', rel='stylesheet', href='/stylesheets/main.css')
+	title Mindmappr
+
+body
+	object(data='/images/logo.svg', type='image/svg+xml', width='770',height='170',id='logo')
+	content!= body
+
+	link(type='text/css', rel='stylesheet', href='/stylesheets/main.css')
+	link(type='text/css', rel='stylesheet', href='/stylesheets/prompt.css')
+
+	iframe#vote(src='http://nodeknockout.com/iframe/fortnight-labs?css=https://raw.github.com/gist/1176404/e336c0efd7c6d78fa1f49fda2f5e813ab747f580/ko-button.css')
+
+	script(type='text/javascript', src='/javascripts/jquery-1.6.2.min.js')
+	script(type='text/javascript', src='/javascripts/jquery-impromptu.js')
+	script(type='text/javascript', src='/javascripts/external/jquery.bgiframe-2.1.2.js')
+	script(type='text/javascript', src='/javascripts/ui/jquery.ui.core.js')
+	script(type='text/javascript', src='/javascripts/ui/jquery.ui.widget.js')
+	script(type='text/javascript', src='/javascripts/ui/jquery.ui.button.js')
+	script(type='text/javascript', src='/javascripts/ui/jquery.ui.position.js')
+	script(type='text/javascript', src='/javascripts/ui/jquery.ui.dialog.js')
+	script(type='text/javascript', src='/javascripts/raphael-min.js')
+	script(type='text/javascript', src='/nowjs/now.js')
+	script(type='text/javascript', src='/javascripts/raphael-connection.js')
+	script(type='text/javascript', src='/browserify.js')

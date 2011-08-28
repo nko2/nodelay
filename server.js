@@ -9,6 +9,10 @@ var express = require('express'),
 	SocketServer = require('./lib/socket-server'),
 	server, socketServer, mindmapProvider;
 
+process.addListener('uncaughtException', function (err, stack) {
+	console.log('Caught exception: ' + err + '\n' + err.stack);
+});
+
 mindmapProvider = new MindmapProvider();
 server = express.createServer();
 
@@ -28,7 +32,7 @@ server.configure(function configureAppAndMiddleware() {
 			'bubble': path.join(__dirname, 'client/bubble'),
 			'dispatcher': path.join(__dirname, 'client/dispatcher'),
 			'receiver': path.join(__dirname, 'client/receiver'),
-			'user': path.join(__dirname, 'client/user'),
+			'user-receiver': path.join(__dirname, 'client/user-receiver'),
 			'promptFactory': path.join(__dirname, 'client/promptFactory'),
 		}
 	}));
@@ -42,7 +46,8 @@ server.get('/', function showHomePage(req, res) {
 			locals: {
 				flash: req.flash(),
 				mindmaps: mindmaps
-			}
+			},
+			layout : 'index-layout.jade'
 		});	
 	});
 });
@@ -70,7 +75,9 @@ server.post('/create', function(req, res) {
 		}
 		else {
 			provider.add({
-				name: req.body.mindmapname
+				name: req.body.mindmapname,
+				bubbles: [],
+				connections: []
 			});
 			res.redirect('/mindmap/' + req.body.mindmapname);
 		}

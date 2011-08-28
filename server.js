@@ -20,7 +20,7 @@ server.configure(function configureAppAndMiddleware() {
 	server.use(express.static(path.join(__dirname, 'public')));
 	server.use(browserify({
 		require: {
-			'workspace': path.join(__dirname, 'client/workspace'),
+			'index': path.join(__dirname, 'client/index'),
 			'util': path.join(__dirname, 'client/util'),
 			'mindmap': path.join(__dirname, 'client/mindmap'),
 			'bubble': path.join(__dirname, 'client/bubble'),

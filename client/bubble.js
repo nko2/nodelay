@@ -122,4 +122,10 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 	});
 };
 
+Bubble.prototype.changeText = function(newText) {
+	this.text.attr('text', newText);
+	this.label = what;
+};
+
+
 module.exports = Bubble;

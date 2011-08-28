@@ -34,9 +34,7 @@ Dispatcher.prototype.addListener = function(bubble) {
 	});
 
 	bubble.on('destroy', function(data) {
-		now.bubbleDestroyedBroadcast({
-			id: bubble.id
-		});
+		now.bubbleDestroyedBroadcast(bubble.id);
 	});
 }
 

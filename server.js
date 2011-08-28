@@ -9,6 +9,10 @@ var express = require('express'),
 	SocketServer = require('./lib/socket-server'),
 	server, socketServer, mindmapProvider;
 
+process.addListener('uncaughtException', function (err, stack) {
+	console.log('Caught exception: ' + err + '\n' + err.stack);
+});
+
 mindmapProvider = new MindmapProvider();
 server = express.createServer();
 

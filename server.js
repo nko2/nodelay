@@ -55,12 +55,12 @@ server.post('/create', function(req, res) {
 	else {
 		console.log('rooms: ' + rooms);
 		rooms.push({
-			name: req.body.roomll
+			name: req.body.room
 		});
 		res.redirect('/workspace/' + req.body.room);
 	}
 });
-server.listen(process.env.PORT || 8080);
+server.listen(8080);
 
 var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {
@@ -88,8 +88,8 @@ everyone.now.bubbleConnectionBroadcast = function(id1, id2) {
 	nowjs.getGroup(this.now.room).now.receiveBubbleConnection(this.now.name, id1, id2);
 };
 
-everyone.now.bubbleDeletedBroadcast = function(id) {
-	nowjs.getGroup(this.now.room).now.receiveBubbleDeleted(this.now.name, id);
+everyone.now.bubbleDestroyedBroadcast = function(id) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleDestroyed(this.now.name, id);
 };
 
 everyone.now.bubbleLabelChangedBroadcast = function(id, text) {

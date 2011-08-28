@@ -26,12 +26,12 @@ Mindmap.prototype.createBubble = function(options) {
 		paper: this.paper,
 		x: options.x,
 		y: options.y,
-		id: options.id		
+		id: options.id
 	});
 
 
 	bubble.on('move', function updateConnections(data) {
-		console.log('handled bubble move');		
+		console.log('handled bubble move');
 		for (var i = self.connections.length; i--;) {
 			self.connections[i].redraw();
 		}
@@ -88,12 +88,12 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 		second: bubble2
 	});
 	connection.connect();
-	
+
 	connection.on('destroy', function() {
 		var idx = self.connections.indexOf(connection);
 		self.connections.splice(idx, 1);
 	});
-	
+
 	this.connections.push(connection);
 };
 
@@ -110,4 +110,3 @@ Mindmap.prototype.getNextBubbleId = function(){
 };
 
 module.exports = Mindmap;
-

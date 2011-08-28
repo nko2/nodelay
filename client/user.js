@@ -4,6 +4,7 @@ function User() {
 };
 
 
+
 User.prototype.setupUser = function() {	
 
 		$(document).ready(function(){
@@ -18,6 +19,7 @@ User.prototype.setupUser = function() {
 			
 		});
 		
+
 	function slugify(name) {
 		return name.replace(' ', '-');
 	}

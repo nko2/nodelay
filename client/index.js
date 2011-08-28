@@ -53,13 +53,13 @@ $(function() {
 
 	if ($.browser.mozilla) {
 		$(document).keypress(function(evt) {
-			if (evt.keyCode == 46) {
+			if (evt.keyCode == 46 || evt.keyCode == 88) {
 				mindmapFacade.deleteSelection();
 			}
 		});
 	} else {
 		$(document).keydown(function(evt) {
-			if (evt.keyCode == 46) {
+			if (evt.keyCode == 46 || evt.keyCode == 88) {
 				mindmapFacade.deleteSelection();
 			}
 		});

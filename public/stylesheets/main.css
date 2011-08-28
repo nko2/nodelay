@@ -9,8 +9,8 @@ body {
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 	border:1px solid white;
-	width: 1000px;
-	height: 600px;
+	width: 1024px;
+	height: 768px;
 }
 
 #container{
@@ -62,13 +62,14 @@ div.rooms{
 
 #messages {
 	position: absolute;
-	left: 1050px;
-	top: 168px;
-	width: 200px;
+	left: 10px;
+	top: 184px;
+	width: 140px;
 	height: 300px;
-	border: 5px solid #666;
-	list-style-type: none;
-	padding-left: 5px;	
+	padding: 10px 7px;
+	border: 1px solid white;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
 }
 
 #vote {
@@ -96,5 +97,5 @@ a:hover{
 
 li
 {
-	list-style-type:circle;	
+	list-style-type: none;
 }

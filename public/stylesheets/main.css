@@ -83,8 +83,12 @@ div#messages p{
 #vote {
 	position: absolute;
 	left: 1120px;
-	top: 500	px;
-	border: none;
+	top: 10px;
+	width:150px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid white;
+	padding:5px;
 }
 
 li.title {

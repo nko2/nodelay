@@ -37,4 +37,3 @@ Receiver.prototype.wireUp = function() {
 };
 
 module.exports = Receiver;
-

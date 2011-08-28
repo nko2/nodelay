@@ -26,7 +26,6 @@ util.inherits(Dispatcher, EventEmitter);
 
 Dispatcher.prototype.addListener = function(bubble) {
 	bubble.on('drag', function (data) {
-		console.log(data);
 		now.bubbleMoveBroadcast({
 			id: bubble.id,
 			x: data.x,

@@ -2,19 +2,19 @@ function User() {
 };
 
 
-User.prototype.setupUser = function() {	
+User.prototype.setupUser = function() {
 	//now.name = prompt('Who are you', '');
-	
+
 	nameSetterPrompter(function(buttonValue, message, formValues) {
 
-			now.name = formValues.alertName;
-			if (now.name != "") {
-				return true;
-			}
-			message.children('#idea-text').css("border", "solid #ff0000 1px");
-			return false;
-		});
-		
+		now.name = formValues.alertName;
+		if (now.name != "") {
+			return true;
+		}
+		message.children('#idea-text').css("border", "solid #ff0000 1px");
+		return false;
+	});
+
 	function nameSetterPrompter(callback) {
 		var txt = 'Who are you ?:<br /><input type="text" id="idea-text" name="alertName"/>';
 

@@ -13,7 +13,7 @@ function Connection(options) {
 	this.second = options.second;
 	this.id = ++idCounter || options.id;
 	EventEmitter.call(this);
-	
+
 	this.first.on('destroy', _.bind(this.destroy, this));
 	this.second.on('destroy', _.bind(this.destroy, this));
 }
@@ -21,8 +21,8 @@ function Connection(options) {
 util.inherits(Connection, EventEmitter);
 
 Connection.prototype.connect = function() {
-	this.connection = this.paper.connection(this.first.ellipse, 
-			this.second.ellipse, '#AECC75', '#AECC75');			
+	this.connection = this.paper.connection(this.first.ellipse,
+			this.second.ellipse, '#AECC75', '#AECC75');
 	this.emit('new');
 };
 

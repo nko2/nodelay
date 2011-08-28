@@ -83,7 +83,7 @@ server.post('/create', function(req, res) {
 		}
 	});		
 });
-server.listen(8080);
+server.listen(+process.env.PORT || 80);
 
 socketServer = new SocketServer(server);
 socketServer.initialize();

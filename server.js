@@ -70,7 +70,9 @@ server.post('/create', function(req, res) {
 		}
 		else {
 			provider.add({
-				name: req.body.mindmapname
+				name: req.body.mindmapname,
+				bubbles: [],
+				connections: []
 			});
 			res.redirect('/mindmap/' + req.body.mindmapname);
 		}

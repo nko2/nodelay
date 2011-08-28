@@ -59,7 +59,7 @@ server.post('/create', function(req, res) {
 		res.redirect('/workspace/' + req.body.room);
 	}
 });
-server.listen(80);
+server.listen(8080);
 
 var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {

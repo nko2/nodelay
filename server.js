@@ -83,6 +83,11 @@ server.listen(8080);
 var everyone = nowjs.initialize(server);
 nowjs.on('connect', function() {
 	this.now.mindmap = 'monkey';
+	
+	mindmapProvider.get(this.now.mindmap, function(err, result) {
+		eyes.inspect(result);
+	});
+	
 	nowjs.getGroup(this.now.mindmap).now.userConnected(this.now.name);
 	console.log('joined: ' + this.now.id);
 })
@@ -98,9 +103,29 @@ everyone.now.bubbleMoveBroadcast = function(bubble) {
 };
 
 everyone.now.bubbleAddedBroadcast = function(bubble) {
+	console.log('about to add bubble: %j', bubble);
+	mindmapProvider.addBubble(this.now.mindmap, bubble, function(err, result) {
+		var connection = { first: bubble.connectedBubbleId, second: bubble.id };
+		
+		console.log('about to add connection: %j', connection);
+		mindmapProvider.addConnection(this.now.mindmap, connection, function(err, result) {
+			if (err) {
+				console.info("Couldn't persist something :(")
+			} else {
+				console('Persisted all the things!');
+			}
+		});	
+	});
+
 	nowjs.getGroup(this.now.mindmap).now.receiveBubbleAdded(this.now.name, bubble);
 };
 everyone.now.bubbleConnectionBroadcast = function(id1, id2) {
+	var connection = { first: id1, second: id2 }
+	console.log('about to add connection: %j', connection);
+	mindmapProvider.addConnection(this.now.mindmap, connection, function(err, result) {
+		eyes.inspect(err);
+		eyes.inspect(result);
+	});
 	nowjs.getGroup(this.now.mindmap).now.receiveBubbleConnection(this.now.name, id1, id2);
 };
 

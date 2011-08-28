@@ -28,7 +28,7 @@ server.configure(function configureAppAndMiddleware() {
 			'bubble': path.join(__dirname, 'client/bubble'),
 			'dispatcher': path.join(__dirname, 'client/dispatcher'),
 			'receiver': path.join(__dirname, 'client/receiver'),
-			'user': path.join(__dirname, 'client/user'),
+			'user-receiver': path.join(__dirname, 'client/user-receiver'),
 			'promptFactory': path.join(__dirname, 'client/promptFactory'),
 		}
 	}));

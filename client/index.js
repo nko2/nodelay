@@ -11,9 +11,8 @@ $(function() {
 	Mindmap = require('./mindmap'),
 	MindmapFacade = require('./mindmapfacade'),
 	mindmapFacade,
-	userreceiver = require('./user')
+	userreceiver = require('./user-receiver'),
 	Dispatcher = require('./dispatcher'),
-	userreceiver.setup();
 	Receiver = require('./receiver'),
 	PromptFactory = require('./promptFactory');
 	
@@ -42,7 +41,6 @@ $(function() {
 				"What's the big idea?",
 				function(what){
 					newText = what;
-					console.log('new Text : '+newText);
 					mindmapFacade.createBubble({
 					x: evt.clientX,
 					y: centerY,
@@ -70,6 +68,7 @@ $(function() {
 	dispatcher.addListener(bubble2);
 
 	receiver = new Receiver(mindmap);
+	userreceiver.setup();
 	receiver.wireUp();
 
 });

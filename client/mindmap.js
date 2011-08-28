@@ -19,14 +19,16 @@ util.inherits(Mindmap, EventEmitter);
 // - y {Number}
 // - text {String}
 // - id {Number}
+// - connectedBubbleId {Number}
 Mindmap.prototype.createBubble = function(options) {
 	var self = this,
 	bubble = new Bubble({
 		paper: this.paper,
 		x: options.x,
 		y: options.y,
-		id: options.id
+		id: options.id		
 	});
+
 
 	bubble.on('move', function updateConnections(data) {
 		console.log('handled bubble move');		
@@ -47,7 +49,9 @@ Mindmap.prototype.createBubble = function(options) {
 	bubble.label = options.text;
 
 	// Only connect the bubbles if this is not the first bubble
-	if (this.selectedBubble) {
+	if (options.connectedBubbleId) {
+		this.connectBubbles(this.getBubble(options.connectedBubbleId), bubble);
+	} else if (this.selectedBubble) {
 		this.connectBubbles(this.selectedBubble, bubble);
 	}
 

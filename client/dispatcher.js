@@ -10,6 +10,7 @@ function Dispatcher(mindmapFacade) {
 	this.mindmapFacade.on('connection', broadcastBubbleConnection);
 	this.mindmapFacade.on('bubble-added', function(data) {
 		now.bubbleAddedBroadcast({
+			connectedBubbleId: data.connectedBubbleId,
 			id: data.bubble.id,
 			x: data.bubble.x,
 			y: data.bubble.y,

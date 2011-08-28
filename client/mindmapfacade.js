@@ -9,14 +9,21 @@ function MindmapFacade(mindmap) {
 util.inherits(MindmapFacade, EventEmitter);
 
 MindmapFacade.prototype.createBubble = function(options) {
-	var self = this, bubble;
-	
+	var self = this, bubble,
+		connectedBubbleId;
+
+	if (this.mindmap.selectedBubble) {
+		connectedBubbleId = this.mindmap.selectedBubble.id;
+	}
+
 	options.id = this.mindmap.getNextBubbleId();
+	
 	bubble = this.mindmap.createBubble(options);
 
 	this.emit('bubble-added', {
+		connectedBubbleId: connectedBubbleId,
 		bubble: bubble
-	});
+	})
 
 	return bubble;
 };

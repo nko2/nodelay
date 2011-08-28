@@ -21,20 +21,16 @@ function Connection(options) {
 util.inherits(Connection, EventEmitter);
 
 Connection.prototype.connect = function() {
-	console.log('Creating connection (%s) between bubbles: %s and %s', 
-				this.id, this.first.id, this.second.id);
 	this.connection = this.paper.connection(this.first.ellipse, 
 			this.second.ellipse, '#AECC75', '#AECC75');			
 	this.emit('new');
 };
 
 Connection.prototype.redraw = function() {
-	console.log('redrawing connection');
 	this.paper.connection(this.connection);
 };
 
 Connection.prototype.destroy = function() {
-	console.log(this.connection);
 	this.connection.line.remove();
 	this.connection.bg.remove();
 	this.connection = null;

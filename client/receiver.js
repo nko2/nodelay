@@ -10,20 +10,16 @@ Receiver.prototype.wireUp = function() {
 	now.receiveBubbleMove = function(name, movement) {
 		if (name === now.name) return;
 
-		console.log(movement);
-
 		var bubble = self.mindmap.getBubble(movement.id);
 
-		console.log(bubble);
 		bubble.move(movement.x, movement.y);
 	};
 
 	now.receiveBubbleAdded = function(name, bubble) {
 		if (name === now.name) return;
 
-		console.log('bubble added:' + bubble);
-
 		self.mindmap.createBubble({
+			connectedBubbleId: bubble.connectedBubbleId,
 			id: bubble.id,
 			x: bubble.x,
 			y: bubble.y,
@@ -33,7 +29,6 @@ Receiver.prototype.wireUp = function() {
 
 	now.receiveBubbleConnection = function(name, id1, id2) {
 		if (name === now.name) return;
-		console.log('bubble connection:' + id1 + " with " + id2);
 		var bubble1 = self.mindmap.getBubble(id1);
 		var bubble2 = self.mindmap.getBubble(id2);
 

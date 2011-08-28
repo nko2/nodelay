@@ -87,6 +87,14 @@ div#messages p{
 	border:0px;
 }
 
+#icon{
+	text-align:left;
+}
+
+img#vote{
+	text-align:left;
+}
+
 li.title {
 	font-weight: bold;
 }

@@ -3,12 +3,50 @@ body {
 	color: #AECC75;
 	font: 16px/1.5 Helvetica,Arial,'Liberation Sans',FreeSans,sans-serif;
 }
+
 	
 #scene {
-	width: 1024px;
-	height: 768px;
-	border: 5px solid #666;
+border:1px solid red;
+	width: 1000px;
+	height: 600px;
 }
+
+#container{
+	width: 1000px:
+}
+
+#header{
+	width:900px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#main{
+	width:1000px;
+	margin:auto;
+}
+
+div.create-room{
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	width: 400px;
+	margin: auto;
+	background-color: #ccc;
+}
+
+div.rooms{
+	padding-top: 10px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	width: 400px;
+	margin-top:10px;
+	margin-left:auto;
+	margin-right:auto;
+	border: 1px solid red;
+	background-color: #ccc;
+}
+
+.center{margin:auto;}
 
 #messages {
 	position: absolute;
@@ -42,12 +80,3 @@ a{
 a:hover{
  	color: #FFF;
 }
-
-.jqicontainer{
-	width: 300px;
-	border:1px dashed;
-	background:#AECC75;
-	color:#333333;
-	margin-left: auto;
-  	margin-right: auto;
-    }

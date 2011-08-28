@@ -11,6 +11,8 @@ util.inherits(MindmapFacade, EventEmitter);
 MindmapFacade.prototype.createBubble = function(options) {
 	var self = this, bubble,
 		connectedBubbleId;
+	
+	console.log(options);
 
 	if (this.mindmap.selectedBubble) {
 		connectedBubbleId = this.mindmap.selectedBubble.id;

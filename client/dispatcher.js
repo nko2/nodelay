@@ -9,14 +9,13 @@ function Dispatcher(mindmapFacade) {
 
 	this.mindmapFacade.on('connection', broadcastBubbleConnection);
 	this.mindmapFacade.on('bubble-added', function(data) {
-		now.bubbleAddedBroadcast({
+	now.bubbleAddedBroadcast({
 			connectedBubbleId: data.connectedBubbleId,
-			id: data.id,
-			x: data.x,
-			y: data.y,
-			text: data.label
+			id: data.bubble.id,
+			x: data.bubble.x,
+			y: data.bubble.y,
+			text: data.bubble.label
 		});
-//		self.addListener(data.bubble);
 	});
 
 	EventEmitter.call(this);

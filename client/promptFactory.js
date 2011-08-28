@@ -2,7 +2,6 @@
 			this.name = $( "#name" );
 			this.allFields = $( [] ).add( name );
 			this.tips = $( ".validateTips" );
-			
 		}
 		
 		
@@ -27,7 +26,7 @@
 				}
 			}
 		
-			PromptFactory.prototype.create = function(targetJQElement,question, callback){
+		PromptFactory.prototype.create = function(targetJQElement,question, callback){
 				var that =this;
 				targetJQElement.dialog({
 					autoOpen: false,
@@ -47,13 +46,16 @@
 								$( this ).dialog( "close" );
 							}
 						},
-						
+						Cancel: function() {
+							$( this ).dialog( "close" );
+						}
 					},
 					close: function() {
-						that.allFields.val( "" ).removeClass( "ui-state-error" );
+						this.allFields.removeClass( "ui-state-error" );
 					}
 				});
 				$('#ui-dialog-title-dialog-form').text(question);
 				targetJQElement.dialog( "open" );
 			};
 module.exports = PromptFactory;
+

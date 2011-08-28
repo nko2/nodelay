@@ -38,7 +38,6 @@ Receiver.prototype.wireUp = function() {
 	now.receiveBubbleDestroyed = function(name, id) {
 		if (name === now.name) return;
 		var bubble = self.mindmap.getBubble(id);
-		console.log(id);
 		self.mindmap.deleteBubble(bubble);
 	};
 };

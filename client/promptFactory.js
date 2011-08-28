@@ -43,19 +43,25 @@
 							if ( bValid ) {
 								//get the result
 								callback(that.name.val());
+								that.allFields.removeClass( "ui-state-error" );
 								$( this ).dialog( "close" );
 							}
 						},
 						Cancel: function() {
+							that.allFields.removeClass( "ui-state-error" );
 							$( this ).dialog( "close" );
 						}
 					},
 					close: function() {
-						this.allFields.removeClass( "ui-state-error" );
+						that.allFields.removeClass( "ui-state-error" );
 					}
 				});
 				$('#ui-dialog-title-dialog-form').text(question);
 				targetJQElement.dialog( "open" );
+				
 			};
+			
+			
+	
 module.exports = PromptFactory;
 

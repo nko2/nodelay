@@ -1,6 +1,5 @@
 var util = require('./util'),
 	EventEmitter = require('events').EventEmitter,
-	idCounter = 0,
 	_ = require('underscore'),
 	Bubble = require('./bubble'),
 	Connection = require('./connection');
@@ -99,7 +98,6 @@ Mindmap.prototype.connectBubbles = function(bubble1, bubble2) {
 
 Mindmap.prototype.changeLabel = function(bubble,text){
 	bubble.label = text;
-	bubble.draw(text);
 };
 
 Mindmap.prototype.getBubble = function(id) {
@@ -109,9 +107,5 @@ Mindmap.prototype.getBubble = function(id) {
 	}));
 };
 
-
-Mindmap.prototype.getNextBubbleId = function(){
-	return ++idCounter;
-};
 
 module.exports = Mindmap;

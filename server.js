@@ -42,7 +42,8 @@ server.get('/', function showHomePage(req, res) {
 			locals: {
 				flash: req.flash(),
 				mindmaps: mindmaps
-			}
+			},
+			layout : 'index-layout.jade'
 		});	
 	});
 });

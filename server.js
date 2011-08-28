@@ -40,7 +40,7 @@ server.configure(function configureAppAndMiddleware() {
 
 server.get('/', function showHomePage(req, res) {
 	var mindmaps;
-	
+
 	mindmapProvider.all(function(err, mindmaps) {
 		res.render('index.jade', {
 			locals: {
@@ -48,7 +48,7 @@ server.get('/', function showHomePage(req, res) {
 				mindmaps: mindmaps
 			},
 			layout : 'index-layout.jade'
-		});	
+		});
 	});
 });
 
@@ -58,13 +58,13 @@ server.get('/mindmap/:name', function(req, res) {
 
 server.post('/create', function(req, res) {
 	var provider = mindmapProvider;
-	
+
 	mindmapProvider.all(function(err, mindmaps) {
 		var response = res,
 			request = req,
 			exists = _.detect(mindmaps, function(mindmap) {
 				return mindmap.name == req.body.mindmapname;
-			});		
+			});
 
 		eyes.inspect(mindmaps);
 
@@ -81,9 +81,9 @@ server.post('/create', function(req, res) {
 			});
 			res.redirect('/mindmap/' + req.body.mindmapname);
 		}
-	});		
+	});
 });
-server.listen(8080);
+server.listen(+process.env.PORT || 8080);
 
 socketServer = new SocketServer(server);
 socketServer.initialize();

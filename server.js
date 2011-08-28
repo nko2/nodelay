@@ -87,8 +87,8 @@ everyone.now.bubbleConnectionBroadcast = function(id1, id2) {
 	nowjs.getGroup(this.now.room).now.receiveBubbleConnection(this.now.name, id1, id2);
 };
 
-everyone.now.bubbleDeletedBroadcast = function(id) {
-	nowjs.getGroup(this.now.room).now.receiveBubbleDeleted(this.now.name, id);
+everyone.now.bubbleDestroyedBroadcast = function(id) {
+	nowjs.getGroup(this.now.room).now.receiveBubbleDestroyed(this.now.name, id);
 };
 
 everyone.now.bubbleLabelChangedBroadcast = function(id, text) {

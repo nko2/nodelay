@@ -1,13 +1,13 @@
-form(action='/create',method='post',name='create')
-	- if (flash.error)
-		p.error= flash.error
-	p
-		label(for='mindmapname') Name your mindmap
-		input(type='text',name='mindmapname',id='mindmapname')
-	p
-		input(type='submit',value='create')
+div.create-room
+	form.create(action='/create',method='post',name='create')
+		- if (flash.error)
+			p.error= flash.error
+		p(class='center')
+			input#mindmapname.test(type='text',name='mindmapname', placeholder="Name your mindmap")
+		p(class='center')
+			input(type='submit',value='create')
 
-#rooms
+div.rooms
 	ul
 	-mindmaps.forEach(function(mindmap){
 		li

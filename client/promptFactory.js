@@ -28,6 +28,7 @@
 			PromptFactory.prototype.create = function(targetJQElement,question, callback){
 				var that =this;
 				targetJQElement.attr("title", question);
+				
 				targetJQElement.dialog({
 					autoOpen: false,
 					height: 250,
@@ -36,7 +37,7 @@
 					closeOnEscape: false,
 					open: function(){ $(".ui-dialog-titlebar-close").hide(); },
 					buttons: {
-						"Who are you?": function() {
+						"OK": function() {
 							var bValid = true;
 								that.allFields.removeClass( "ui-state-error" );
 								bValid = bValid && that.checkLength( that.name, "username", 3, 16 );
@@ -55,6 +56,7 @@
 						that.allFields.val( "" ).removeClass( "ui-state-error" );
 					}
 				});
+				$('#ui-dialog-title-dialog-form').text(question);
 				targetJQElement.dialog( "open" );
 			};
 module.exports = PromptFactory;

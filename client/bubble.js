@@ -1,4 +1,5 @@
-var util = require('./util'), 
+var util = require('./util'),
+	PromptFactory = require('./promptFactory'),
 	EventEmitter = require('events').EventEmitter,
 	idCounter = 0;
 
@@ -106,9 +107,20 @@ Bubble.prototype.addTextToBubble = function (bubbleText) {
 
 
 	this.text.click(function() {
+		var editTextPrompt = new PromptFactory(),
+			newText;
+		editTextPrompt.create(
+			$('#dialog-form'),
+			"What would you like to change?",
+			function(what){
+				newText = what;
+				self.text.attr('text', newText);
+				self.emit('label-changed', { newText: newText });
+			}
+		)/*
 		var newText = prompt('Enter new text:');
 		self.text.attr('text', newText);
-		self.emit('label-changed', { newText: newText });
+		self.emit('label-changed', { newText: newText });*/
 	});
 };
 

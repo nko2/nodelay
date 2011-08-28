@@ -60,6 +60,7 @@ Mindmap.prototype.createBubble = function(options) {
 
 Mindmap.prototype.deleteSelection = function() {
 	this.deleteBubble(this.selectedBubble);
+	this.changeSelection(_.first(this.bubbles));
 };
 
 Mindmap.prototype.deleteBubble = function(bubble) {

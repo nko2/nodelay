@@ -2,7 +2,7 @@
 			this.name = $( "#name" );
 			this.allFields = $( [] ).add( name );
 			this.tips = $( ".validateTips" );
-			console.log(this.allFields);
+
 		}
 			PromptFactory.prototype.updateTips = function updateTips( t ) {
 				var self = this;
@@ -44,7 +44,7 @@
 							if ( bValid ) {
 								//get the result
 								valToSet = that.name.val();
-								console.log(that.name.val());
+								//console.log(that.name.val());
 								$( this ).dialog( "close" );
 							}
 						},

@@ -1,20 +1,20 @@
 $(function() {
 
 	var width = 1024,
-	height = 768,
-	circleWidth = width / 10,
-	circleHeight = height / 10,
-	paper = Raphael(document.getElementById("scene"), width, height),
-	mindmap,
-	bubble1,
-	bubble2,
-	Mindmap = require('./mindmap'),
-	MindmapFacade = require('./mindmapfacade'),
-	mindmapFacade,
-	userreceiver = require('./user-receiver'),
-	Dispatcher = require('./dispatcher'),
-	Receiver = require('./receiver'),
-	PromptFactory = require('./promptFactory');
+		height = 768,
+		circleWidth = width / 10,
+		circleHeight = height / 10,
+		paper = Raphael(document.getElementById("scene"), width, height),
+		mindmap,
+		bubble1,
+		bubble2,
+		Mindmap = require('./mindmap'),
+		MindmapFacade = require('./mindmapfacade'),
+		mindmapFacade,
+		userreceiver = require('./user-receiver'),
+		Dispatcher = require('./dispatcher'),
+		Receiver = require('./receiver'),
+		PromptFactory = require('./promptFactory');
 	
 	mindmap = new Mindmap(paper);
 	mindmapFacade = new MindmapFacade(mindmap);
@@ -63,13 +63,12 @@ $(function() {
 		});
 	}
 
+	userreceiver.setup();
 	dispatcher = new Dispatcher(mindmapFacade);
 	dispatcher.addListener(bubble1);
 	dispatcher.addListener(bubble2);
 
 	receiver = new Receiver(mindmap);
-	userreceiver.setup();
 	receiver.wireUp();
-
 });
 

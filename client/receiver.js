@@ -1,7 +1,8 @@
 //this class should take care of evets from outside and telling the
 //ui to update
-function Receiver(mindmap) {
+function Receiver(mindmap,dispatcher) {
 	this.mindmap = mindmap;
+	this.dispatcher = dispatcher;
 };
 
 Receiver.prototype.wireUp = function() {
@@ -16,15 +17,14 @@ Receiver.prototype.wireUp = function() {
 	};
 
 	now.receiveBubbleAdded = function(name, bubble) {
-		if (name === now.name) return;
-
-		self.mindmap.createBubble({
+		var mybubble = self.mindmap.createBubble({
 			connectedBubbleId: bubble.connectedBubbleId,
 			id: bubble.id,
 			x: bubble.x,
 			y: bubble.y,
 			text: bubble.text
 		});
+		self.dispatcher.addListener(mybubble);
 	};
 
 	now.receiveBubbleConnection = function(name, id1, id2) {

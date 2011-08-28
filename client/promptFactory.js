@@ -31,7 +31,6 @@
 				var that =this;
 				targetJQElement.dialog({
 					autoOpen: false,
-					height: 250,
 					width: 350,
 					modal: true,
 					closeOnEscape: false,
@@ -48,9 +47,7 @@
 								$( this ).dialog( "close" );
 							}
 						},
-						Cancel: function() {
-							$( this ).dialog( "close" );
-						}
+						
 					},
 					close: function() {
 						that.allFields.val( "" ).removeClass( "ui-state-error" );

@@ -73,7 +73,11 @@ server.post('/create', function(req, res) {
 									'try another one');
 			res.redirect('/');
 		}
-		else {
+		else if (!/^[A-Za-z0-9]+$/.test(req.body.mindmapname)) {
+			req.flash('error', 'A mindmap name must be alphanumeric' +
+									'try another one');
+			res.redirect('/');
+		} else {
 			provider.add({
 				name: req.body.mindmapname,
 				bubbles: [],

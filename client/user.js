@@ -11,8 +11,7 @@ userreceiver.setup = function() {
 				function(what){
 					now.name = what;
 					console.log('now name : '+now.name);
-			});
-			
+			});			
 		});
 		
 

@@ -6,10 +6,10 @@ var express = require('express'),
 	_ = require('underscore'),
 	browserify = require('browserify'),
 	crypto = require('crypto'),
-	MindmapManager = require('./lib/mindmap-manager'),
-	server, mindmapManager;
+	MindmapProvider = require('./lib/mindmap-provider'),
+	server, mindmapProvider;
 
-mindmapManager = new MindmapManager();
+mindmapProvider = new MindmapProvider();
 server = express.createServer();
 
 server.configure(function configureAppAndMiddleware() {
@@ -37,7 +37,7 @@ server.configure(function configureAppAndMiddleware() {
 server.get('/', function showHomePage(req, res) {
 	var mindmaps;
 	
-	mindmapManager.all(function(err, mindmaps) {
+	mindmapProvider.all(function(err, mindmaps) {
 		res.render('index.jade', {
 			locals: {
 				flash: req.flash(),
@@ -52,9 +52,9 @@ server.get('/mindmap/:name', function(req, res) {
 });
 
 server.post('/create', function(req, res) {
-	var mgr = mindmapManager;
+	var provider = mindmapProvider;
 	
-	mindmapManager.all(function(err, mindmaps) {
+	mindmapProvider.all(function(err, mindmaps) {
 		var response = res,
 			request = req,
 			exists = _.detect(mindmaps, function(mindmap) {
@@ -71,7 +71,7 @@ server.post('/create', function(req, res) {
 		}
 		else {
 			console.log('mindmaps: ' + mindmaps);
-			mgr.add({
+			provider.add({
 				name: req.body.mindmapname
 			});
 			res.redirect('/mindmap/' + req.body.mindmapname);

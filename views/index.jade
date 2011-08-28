@@ -1,13 +1,13 @@
 form(action='/create',method='post',name='create')
 	p
-		label(for='room') Name your mindmap
-		input(type='text',name='room',id='room')
+		label(for='mindmapname') Name your mindmap
+		input(type='text',name='mindmapname',id='mindmapname')
 	p
 		input(type='submit',value='create')
 
 #rooms
 	ul
-	-rooms.forEach(function(room){
+	-mindmaps.forEach(function(mindmap){
 		li
-			a(href='/workspace/#{room.name}')=room.name
+			a(href='/mindmap/#{mindmap.name}')=mindmap.name
 	-})

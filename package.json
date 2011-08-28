@@ -25,7 +25,8 @@
     "browserify": "1.4.3",
     "jade": "0.14.2",
     "eyes": "0.1.6",
-    "underscore": "1.1.7"
+    "underscore": "1.1.7",
+    "mongodb": "0.9.6-13"
   },
   "devDependencies": {
     "ready.js": ">= 1.3.1",

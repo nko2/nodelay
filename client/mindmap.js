@@ -29,9 +29,7 @@ Mindmap.prototype.createBubble = function(options) {
 		id: options.id
 	});
 
-
 	bubble.on('move', function updateConnections(data) {
-		console.log('handled bubble move');
 		for (var i = self.connections.length; i--;) {
 			self.connections[i].redraw();
 		}

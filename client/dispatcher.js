@@ -25,11 +25,17 @@ function Dispatcher(mindmapFacade) {
 util.inherits(Dispatcher, EventEmitter);
 
 Dispatcher.prototype.addListener = function(bubble) {
-	bubble.on('drag', function (data) {
+	bubble.on('drag', function(data) {
 		now.bubbleMoveBroadcast({
 			id: bubble.id,
 			x: data.x,
 			y: data.y
+		});
+	});
+
+	bubble.on('destroy', function(data) {
+		now.bubbleDestroyedBroadcast({
+			id: bubble.id
 		});
 	});
 }

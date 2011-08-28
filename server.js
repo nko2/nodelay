@@ -56,6 +56,10 @@ server.get('/mindmap/:name', function(req, res) {
 	res.render('workspace.jade');
 });
 
+server.get('/info', function(req, res){
+	res.render('info.jade',{layout : 'index-layout.jade'});
+});
+
 server.post('/create', function(req, res) {
 	var provider = mindmapProvider;
 

@@ -17,7 +17,7 @@ MindmapFacade.prototype.createBubble = function(options) {
 	}
 
 	options.id = this.mindmap.getNextBubbleId();
-	
+
 	bubble = this.mindmap.createBubble(options);
 
 	this.emit('bubble-added', {

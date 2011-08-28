@@ -51,11 +51,19 @@ $(function() {
 		});
 	});
 
-	$(document).keypress(function(evt) {
-		if (evt.keyCode == 46) {
-			mindmapFacade.deleteSelection();
-		}
-	});
+	if ($.browser.mozilla) {
+		$(document).keypress(function(evt) {
+			if (evt.keyCode == 46) {
+				mindmapFacade.deleteSelection();
+			}
+		});
+	} else {
+		$(document).keydown(function(evt) {
+			if (evt.keyCode == 46) {
+				mindmapFacade.deleteSelection();
+			}
+		});
+	}
 
 	dispatcher = new Dispatcher(mindmapFacade);
 	dispatcher.addListener(bubble1);
@@ -75,6 +83,5 @@ $(function() {
 			}
 		});
 	}
-
 });
 

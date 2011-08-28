@@ -84,6 +84,7 @@ div#messages p{
 	position: absolute;
 	left: 998px;
 	top: 100px;
+	height: 55px;
 	border:0px;
 }
 
